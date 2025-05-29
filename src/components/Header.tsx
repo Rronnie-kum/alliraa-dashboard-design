@@ -52,12 +52,14 @@ const Header = () => {
                   <User className="h-5 w-5" />
                 </Button>
               </Link>
-              <Button variant="ghost" size="sm" className="relative">
-                <ShoppingBag className="h-5 w-5" />
-                <span className="absolute -top-2 -right-2 bg-amber-800 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
-              </Button>
+              <Link to="/cart">
+                <Button variant="ghost" size="sm" className="relative hover:bg-amber-50 hover:text-amber-800">
+                  <ShoppingBag className="h-5 w-5" />
+                  <span className="absolute -top-2 -right-2 bg-amber-800 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    2
+                  </span>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
