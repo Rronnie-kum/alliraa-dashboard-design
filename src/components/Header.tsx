@@ -1,10 +1,17 @@
 
 import React from 'react';
-import { Search, ShoppingBag, User, Menu } from 'lucide-react';
+import { ShoppingBag, User, Menu } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
+import SearchBar from './SearchBar';
 import { Button } from '@/components/ui/button';
 
 const Header = () => {
+  const handleSearch = (query: string) => {
+    console.log('Search query:', query);
+    // Add search logic here - could navigate to search results page
+  };
+
   return (
     <>
       {/* Promo Bar */}
@@ -23,26 +30,28 @@ const Header = () => {
             </Button>
 
             {/* Logo */}
-            <Logo />
+            <Link to="/">
+              <Logo />
+            </Link>
 
             {/* Navigation */}
             <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">HOME</a>
+              <Link to="/" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">HOME</Link>
               <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">SHOP</a>
               <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">PRODUCT</a>
               <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">PAGES</a>
               <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">BLOGS</a>
-              <a href="/dashboard" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">DASHBOARD</a>
+              <Link to="/dashboard" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">DASHBOARD</Link>
             </nav>
 
             {/* Right side icons */}
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
-                <Search className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="sm">
-                <User className="h-5 w-5" />
-              </Button>
+              <SearchBar onSearch={handleSearch} className="hidden sm:block" />
+              <Link to="/login">
+                <Button variant="ghost" size="sm" className="hover:bg-amber-50 hover:text-amber-800">
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
               <Button variant="ghost" size="sm" className="relative">
                 <ShoppingBag className="h-5 w-5" />
                 <span className="absolute -top-2 -right-2 bg-amber-800 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
