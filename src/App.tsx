@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Kurti from "./pages/Kurti";
+import LikedProducts from "./pages/LikedProducts";
 import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
@@ -33,6 +34,7 @@ const App: React.FC = () => {
             <Route path="/shop" element={<Shop />} />
             <Route path="/product" element={<Product />} />
             <Route path="/kurti" element={<Kurti />} />
+            <Route path="/liked-products" element={<LikedProducts />} />
             <Route path="/about" element={<About />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tasks" element={<Tasks />} />

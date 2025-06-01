@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
 import { Filter, Grid, List, Star, Heart, ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Kurti = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -160,6 +161,12 @@ const Kurti = () => {
                 <Filter className="h-4 w-4" />
                 All Filters
               </Button>
+              <Link to="/liked-products">
+                <Button variant="outline" className="flex items-center gap-2 bg-white hover:bg-pink-50 border-pink-200 text-pink-600 hover:text-pink-700">
+                  <Heart className="h-4 w-4" />
+                  Show Liked Products
+                </Button>
+              </Link>
               <select className="border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-amber-500 focus:border-transparent">
                 <option>Sort by: Featured</option>
                 <option>Price: Low to High</option>
