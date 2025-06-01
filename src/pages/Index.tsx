@@ -5,6 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import CategorySection from '@/components/CategorySection';
 import BestsellerSection from '@/components/BestsellerSection';
 import PromotionalBanners from '@/components/PromotionalBanners';
+import ShopTheLookSection from '@/components/ShopTheLookSection';
 import LifestyleBanner from '@/components/LifestyleBanner';
 import Footer from '@/components/Footer';
 
@@ -16,6 +17,7 @@ const Index = () => {
       <CategorySection />
       <BestsellerSection />
       <PromotionalBanners />
+      <ShopTheLookSection />
       <LifestyleBanner />
       <Footer />
     </div>
