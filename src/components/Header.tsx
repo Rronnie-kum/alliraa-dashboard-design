@@ -39,9 +39,8 @@ const Header = () => {
               <Link to="/" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">HOME</Link>
               <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">SHOP</a>
               <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">PRODUCT</a>
-              <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">PAGES</a>
-              <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">BLOGS</a>
-              <Link to="/dashboard" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">DASHBOARD</Link>
+              <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">KURTI</a>
+              <a href="#" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">ABOUT</a>
             </nav>
 
             {/* Right side icons */}
