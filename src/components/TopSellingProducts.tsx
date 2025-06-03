@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -131,23 +132,24 @@ const TopSellingProducts = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#c7b299' }}>
+    <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#B8653F' }}>
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="w-full h-full bg-gradient-to-r from-amber-200/20 via-transparent to-amber-200/20"></div>
+      <div className="absolute inset-0 opacity-15">
+        <div className="w-full h-full bg-gradient-to-r from-orange-300/30 via-transparent to-amber-300/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-200/10 to-transparent"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center bg-gradient-to-r from-orange-800 to-red-800 text-white px-6 py-2 rounded-full text-sm font-medium mb-6 shadow-lg">
             <Star className="h-4 w-4 mr-2" />
             Top Selling
           </div>
-          <h2 className="text-5xl font-bold text-gray-800 mb-4">
-            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-700">Collection</span>
+          <h2 className="text-5xl font-bold text-white mb-4">
+            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-amber-200">Collection</span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-xl text-orange-100 max-w-2xl mx-auto">
             Discover our most loved pieces that define contemporary fashion
           </p>
         </div>
@@ -215,18 +217,18 @@ const TopSellingProducts = () => {
           {/* Navigation Arrows with updated styling */}
           <Button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-gray-200/50 hover:bg-white/90 transition-all duration-300 z-20 shadow-lg"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-orange-200/50 hover:bg-white transition-all duration-300 z-20 shadow-xl"
             variant="ghost"
           >
-            <ChevronLeft className="h-6 w-6 text-gray-700" />
+            <ChevronLeft className="h-6 w-6 text-orange-800" />
           </Button>
 
           <Button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-gray-200/50 hover:bg-white/90 transition-all duration-300 z-20 shadow-lg"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-orange-200/50 hover:bg-white transition-all duration-300 z-20 shadow-xl"
             variant="ghost"
           >
-            <ChevronRight className="h-6 w-6 text-gray-700" />
+            <ChevronRight className="h-6 w-6 text-orange-800" />
           </Button>
         </div>
 
@@ -238,8 +240,8 @@ const TopSellingProducts = () => {
               onClick={() => setCurrentIndex(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? 'bg-amber-700 w-8' 
-                  : 'bg-gray-600/50 hover:bg-gray-600/70'
+                  ? 'bg-orange-200 w-8 shadow-lg' 
+                  : 'bg-orange-800/60 hover:bg-orange-700/80'
               }`}
             />
           ))}
@@ -247,7 +249,7 @@ const TopSellingProducts = () => {
 
         {/* CTA Button */}
         <div className="text-center mt-12">
-          <Button className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all">
+          <Button className="bg-gradient-to-r from-orange-800 to-red-800 hover:from-orange-900 hover:to-red-900 text-white px-8 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all border border-orange-700/30">
             <Tag className="h-5 w-5 mr-2" />
             Shop All Bestsellers
           </Button>
@@ -258,3 +260,4 @@ const TopSellingProducts = () => {
 };
 
 export default TopSellingProducts;
+
