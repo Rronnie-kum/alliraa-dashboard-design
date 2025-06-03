@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -131,10 +130,10 @@ const TopSellingProducts = () => {
   };
 
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-slate-50 via-gray-100 to-slate-200 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="w-full h-full bg-gradient-to-r from-amber-900/20 via-transparent to-amber-900/20"></div>
+      <div className="absolute inset-0 opacity-20">
+        <div className="w-full h-full bg-gradient-to-r from-amber-200/30 via-transparent to-rose-200/30"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,10 +143,10 @@ const TopSellingProducts = () => {
             <Star className="h-4 w-4 mr-2" />
             Top Selling
           </div>
-          <h2 className="text-5xl font-bold text-white mb-4">
-            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">Collection</span>
+          <h2 className="text-5xl font-bold text-gray-800 mb-4">
+            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">Collection</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Discover our most loved pieces that define contemporary fashion
           </p>
         </div>
@@ -212,21 +211,21 @@ const TopSellingProducts = () => {
             ))}
           </div>
 
-          {/* Navigation Arrows with Glassmorphism */}
+          {/* Navigation Arrows with updated styling */}
           <Button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 z-20"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-gray-200/50 hover:bg-white/90 transition-all duration-300 z-20 shadow-lg"
             variant="ghost"
           >
-            <ChevronLeft className="h-6 w-6 text-white" />
+            <ChevronLeft className="h-6 w-6 text-gray-700" />
           </Button>
 
           <Button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 z-20"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-gray-200/50 hover:bg-white/90 transition-all duration-300 z-20 shadow-lg"
             variant="ghost"
           >
-            <ChevronRight className="h-6 w-6 text-white" />
+            <ChevronRight className="h-6 w-6 text-gray-700" />
           </Button>
         </div>
 
@@ -238,8 +237,8 @@ const TopSellingProducts = () => {
               onClick={() => setCurrentIndex(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? 'bg-amber-500 w-8' 
-                  : 'bg-white/30 hover:bg-white/50'
+                  ? 'bg-amber-600 w-8' 
+                  : 'bg-gray-400/50 hover:bg-gray-500/70'
               }`}
             />
           ))}
