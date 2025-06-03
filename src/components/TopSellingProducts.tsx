@@ -154,7 +154,8 @@ const TopSellingProducts = () => {
 
         {/* 3D Coverflow Carousel */}
         <div 
-          className="relative h-[600px] flex items-center justify-center perspective-1000"
+          className="relative h-[600px] flex items-center justify-center"
+          style={{ perspective: '1000px' }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
@@ -163,10 +164,13 @@ const TopSellingProducts = () => {
               <div
                 key={product.id}
                 className="absolute transition-all duration-700 ease-out cursor-pointer group"
-                style={getCardStyle(index)}
+                style={{
+                  ...getCardStyle(index),
+                  transformStyle: 'preserve-3d'
+                }}
                 onClick={() => setCurrentIndex(index)}
               >
-                <div className="relative w-72 h-96 rounded-2xl overflow-hidden shadow-2xl bg-white transform-gpu">
+                <div className="relative w-72 h-96 rounded-2xl overflow-hidden shadow-2xl bg-white">
                   {/* Product Image */}
                   <div className="relative h-80 overflow-hidden">
                     <img
@@ -249,15 +253,6 @@ const TopSellingProducts = () => {
           </Button>
         </div>
       </div>
-
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .transform-gpu {
-          transform-style: preserve-3d;
-        }
-      `}</style>
     </section>
   );
 };
