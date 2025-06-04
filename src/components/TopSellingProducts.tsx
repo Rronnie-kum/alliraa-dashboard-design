@@ -193,10 +193,10 @@ const TopSellingProducts = () => {
       };
     }
 
-    const baseTranslateX = normalizedDiff * 320;
-    const scale = isActive ? 1.2 : 0.8;
-    const rotateY = isActive ? 0 : normalizedDiff * -30;
-    const opacity = isActive ? 1 : 0.6;
+    const baseTranslateX = normalizedDiff * 350;
+    const scale = isActive ? 1.1 : 0.85;
+    const rotateY = isActive ? 0 : normalizedDiff * -25;
+    const opacity = isActive ? 1 : 0.7;
     const zIndex = isActive ? 10 : 5;
 
     return {
@@ -232,8 +232,8 @@ const TopSellingProducts = () => {
 
         {/* 3D Coverflow Carousel */}
         <div 
-          className="relative h-[600px] flex items-center justify-center"
-          style={{ perspective: '1000px' }}
+          className="relative h-[650px] flex items-center justify-center"
+          style={{ perspective: '1200px' }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
@@ -248,9 +248,9 @@ const TopSellingProducts = () => {
                 }}
                 onClick={() => setCurrentIndex(index)}
               >
-                <div className="relative w-72 h-96 rounded-2xl overflow-hidden shadow-2xl bg-white">
-                  {/* Product Image */}
-                  <div className="relative h-80 overflow-hidden">
+                <div className="relative w-80 h-[500px] rounded-3xl overflow-hidden shadow-2xl bg-white border-4 border-white/20">
+                  {/* Product Image Container */}
+                  <div className="relative h-80 overflow-hidden rounded-t-3xl">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -258,30 +258,63 @@ const TopSellingProducts = () => {
                     />
                     
                     {/* Discount Badge */}
-                    <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       {product.discount}
                     </div>
 
-                    {/* Brand Logo Overlay - Shows on Hover */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    {/* Rating Badge */}
+                    <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
+                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                      {product.rating}
+                    </div>
+
+                    {/* Brand Overlay on Hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                       <div className="text-center text-white">
-                        <div className="text-2xl font-bold mb-2">{product.brand}</div>
-                        <div className="text-lg">{product.discount}</div>
+                        <div className="text-xl font-bold">{product.brand}</div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Product Info */}
-                  <div className="p-4 bg-white">
-                    <h3 className="font-semibold text-gray-900 mb-2 truncate">{product.name}</h3>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-lg font-bold text-gray-900">${product.price}</span>
-                        <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
+                  {/* Product Details Container */}
+                  <div className="p-6 bg-white rounded-b-3xl">
+                    <div className="space-y-3">
+                      {/* Product Name */}
+                      <h3 className="font-bold text-lg text-gray-900 leading-tight line-clamp-2">
+                        {product.name}
+                      </h3>
+                      
+                      {/* Brand */}
+                      <p className="text-sm text-gray-600 font-medium">{product.brand}</p>
+                      
+                      {/* Price Section */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-2xl font-bold text-gray-900">${product.price}</span>
+                          {product.originalPrice && (
+                            <span className="text-lg text-gray-500 line-through">${product.originalPrice}</span>
+                          )}
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-1">
-                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                        <span className="text-sm text-gray-600">{product.rating}</span>
+                      
+                      {/* Rating and Reviews */}
+                      <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                        <div className="flex items-center space-x-2">
+                          <div className="flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`h-4 w-4 ${
+                                  i < Math.floor(product.rating)
+                                    ? 'text-yellow-400 fill-current'
+                                    : 'text-gray-300'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                          <span className="text-sm font-medium text-gray-700">{product.rating}</span>
+                        </div>
+                        <span className="text-sm text-gray-500">({product.reviews} reviews)</span>
                       </div>
                     </div>
                   </div>
@@ -290,43 +323,43 @@ const TopSellingProducts = () => {
             ))}
           </div>
 
-          {/* Navigation Arrows with updated styling */}
+          {/* Navigation Arrows */}
           <Button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-orange-200/50 hover:bg-white transition-all duration-300 z-20 shadow-xl"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/95 backdrop-blur-md border-2 border-orange-200/50 hover:bg-white hover:border-orange-300 transition-all duration-300 z-20 shadow-xl"
             variant="ghost"
           >
-            <ChevronLeft className="h-6 w-6 text-orange-800" />
+            <ChevronLeft className="h-7 w-7 text-orange-800" />
           </Button>
 
           <Button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-orange-200/50 hover:bg-white transition-all duration-300 z-20 shadow-xl"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/95 backdrop-blur-md border-2 border-orange-200/50 hover:bg-white hover:border-orange-300 transition-all duration-300 z-20 shadow-xl"
             variant="ghost"
           >
-            <ChevronRight className="h-6 w-6 text-orange-800" />
+            <ChevronRight className="h-7 w-7 text-orange-800" />
           </Button>
         </div>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center mt-8 space-x-2">
+        <div className="flex justify-center mt-12 space-x-3">
           {topSellingProducts.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`h-3 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? 'bg-orange-200 w-8 shadow-lg' 
-                  : 'bg-orange-800/60 hover:bg-orange-700/80'
+                  ? 'bg-orange-200 w-10 shadow-lg' 
+                  : 'bg-orange-800/60 hover:bg-orange-700/80 w-3'
               }`}
             />
           ))}
         </div>
 
         {/* CTA Button */}
-        <div className="text-center mt-12">
-          <Button className="bg-gradient-to-r from-orange-800 to-red-800 hover:from-orange-900 hover:to-red-900 text-white px-8 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all border border-orange-700/30">
-            <Tag className="h-5 w-5 mr-2" />
+        <div className="text-center mt-16">
+          <Button className="bg-gradient-to-r from-orange-800 to-red-800 hover:from-orange-900 hover:to-red-900 text-white px-10 py-5 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all border-2 border-orange-700/30 font-semibold">
+            <Tag className="h-6 w-6 mr-3" />
             Shop All Bestsellers
           </Button>
         </div>
