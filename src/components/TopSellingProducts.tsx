@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -37,39 +36,6 @@ const topSellingProducts = [
     image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop&crop=center',
     rating: 4.9,
     reviews: 156
-  },
-  {
-    id: 4,
-    name: 'Traditional Lehenga',
-    price: 499,
-    originalPrice: 699,
-    discount: '29% OFF',
-    brand: 'ALLIRAA',
-    image: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=600&fit=crop&crop=center',
-    rating: 4.7,
-    reviews: 298
-  },
-  {
-    id: 5,
-    name: 'Fusion Palazzo Set',
-    price: 199,
-    originalPrice: 249,
-    discount: '20% OFF',
-    brand: 'ALLIRAA',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=600&fit=crop&crop=center',
-    rating: 4.6,
-    reviews: 167
-  },
-  {
-    id: 6,
-    name: 'Bridal Collection Gown',
-    price: 599,
-    originalPrice: 799,
-    discount: '25% OFF',
-    brand: 'ALLIRAA',
-    image: 'https://images.unsplash.com/photo-1566479179817-34b8ac7c6cfe?w=400&h=600&fit=crop&crop=center',
-    rating: 4.9,
-    reviews: 134
   }
 ];
 
@@ -108,7 +74,7 @@ const TopSellingProducts = () => {
     const isActive = normalizedDiff === 0;
     const absOffset = Math.abs(normalizedDiff);
 
-    if (absOffset > 2) {
+    if (absOffset > 1) {
       return {
         transform: 'translateX(0) scale(0) rotateY(0deg)',
         opacity: 0,
@@ -117,11 +83,11 @@ const TopSellingProducts = () => {
       };
     }
 
-    const baseTranslateX = normalizedDiff * 280;
-    const scale = isActive ? 1.2 : Math.max(0.7, 1 - absOffset * 0.15);
-    const rotateY = isActive ? 0 : normalizedDiff * -25;
-    const opacity = isActive ? 1 : Math.max(0.4, 1 - absOffset * 0.3);
-    const zIndex = isActive ? 10 : Math.max(1, 5 - absOffset);
+    const baseTranslateX = normalizedDiff * 320;
+    const scale = isActive ? 1.2 : 0.8;
+    const rotateY = isActive ? 0 : normalizedDiff * -30;
+    const opacity = isActive ? 1 : 0.6;
+    const zIndex = isActive ? 10 : 5;
 
     return {
       transform: `translateX(${baseTranslateX}px) scale(${scale}) rotateY(${rotateY}deg)`,
@@ -260,4 +226,3 @@ const TopSellingProducts = () => {
 };
 
 export default TopSellingProducts;
-
