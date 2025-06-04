@@ -36,6 +36,116 @@ const topSellingProducts = [
     image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop&crop=center',
     rating: 4.9,
     reviews: 156
+  },
+  {
+    id: 4,
+    name: 'Traditional Lehenga',
+    price: 499,
+    originalPrice: 699,
+    discount: '29% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=600&fit=crop&crop=center',
+    rating: 4.7,
+    reviews: 298
+  },
+  {
+    id: 5,
+    name: 'Fusion Palazzo Set',
+    price: 199,
+    originalPrice: 249,
+    discount: '20% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=600&fit=crop&crop=center',
+    rating: 4.6,
+    reviews: 167
+  },
+  {
+    id: 6,
+    name: 'Bridal Collection Gown',
+    price: 599,
+    originalPrice: 799,
+    discount: '25% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1566479179817-34b8ac7c6cfe?w=400&h=600&fit=crop&crop=center',
+    rating: 4.9,
+    reviews: 134
+  },
+  {
+    id: 7,
+    name: 'Embroidered Anarkali',
+    price: 279,
+    originalPrice: 349,
+    discount: '20% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=600&fit=crop&crop=center',
+    rating: 4.8,
+    reviews: 215
+  },
+  {
+    id: 8,
+    name: 'Casual Maxi Dress',
+    price: 129,
+    originalPrice: 179,
+    discount: '28% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop&crop=center',
+    rating: 4.5,
+    reviews: 142
+  },
+  {
+    id: 9,
+    name: 'Formal Blazer Set',
+    price: 389,
+    originalPrice: 499,
+    discount: '22% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1594736797933-d0e3e8aa8c9e?w=400&h=600&fit=crop&crop=center',
+    rating: 4.7,
+    reviews: 178
+  },
+  {
+    id: 10,
+    name: 'Bohemian Long Skirt',
+    price: 169,
+    originalPrice: 219,
+    discount: '23% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop&crop=center',
+    rating: 4.6,
+    reviews: 193
+  },
+  {
+    id: 11,
+    name: 'Vintage Crop Top',
+    price: 89,
+    originalPrice: 119,
+    discount: '25% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=400&h=600&fit=crop&crop=center',
+    rating: 4.4,
+    reviews: 156
+  },
+  {
+    id: 12,
+    name: 'Designer Jumpsuit',
+    price: 259,
+    originalPrice: 329,
+    discount: '21% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=600&fit=crop&crop=center',
+    rating: 4.8,
+    reviews: 208
+  },
+  {
+    id: 13,
+    name: 'Party Wear Gown',
+    price: 449,
+    originalPrice: 599,
+    discount: '25% OFF',
+    brand: 'ALLIRAA',
+    image: 'https://images.unsplash.com/photo-1566479179817-34b8ac7c6cfe?w=400&h=600&fit=crop&crop=center',
+    rating: 4.9,
+    reviews: 267
   }
 ];
 
@@ -48,7 +158,7 @@ const TopSellingProducts = () => {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % topSellingProducts.length);
-    }, 4000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
