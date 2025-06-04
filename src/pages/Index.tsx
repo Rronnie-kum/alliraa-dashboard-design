@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import CategorySection from '@/components/CategorySection';
 import BestsellerSection from '@/components/BestsellerSection';
-import SlidingShow from '@/components/SlidingShow';
+import TopSellingProducts from '@/components/TopSellingProducts';
 import PromotionalBanners from '@/components/PromotionalBanners';
 import ShopTheLookSection from '@/components/ShopTheLookSection';
 import LifestyleBanner from '@/components/LifestyleBanner';
@@ -17,7 +17,7 @@ const Index = () => {
       <HeroSection />
       <CategorySection />
       <BestsellerSection />
-      <SlidingShow />
+      <TopSellingProducts />
       <PromotionalBanners />
       <ShopTheLookSection />
       <LifestyleBanner />
