@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ShoppingBag, User, Menu } from 'lucide-react';
+import { ShoppingBag, User, Menu, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
@@ -49,6 +49,14 @@ const Header = () => {
               <Link to="/login">
                 <Button variant="ghost" size="sm" className="hover:bg-amber-50 hover:text-amber-800">
                   <User className="h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/liked-products">
+                <Button variant="ghost" size="sm" className="relative hover:bg-pink-50 hover:text-pink-600 group">
+                  <Heart className="h-5 w-5 transition-colors group-hover:text-pink-600" />
+                  <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    3
+                  </span>
                 </Button>
               </Link>
               <Link to="/cart">
