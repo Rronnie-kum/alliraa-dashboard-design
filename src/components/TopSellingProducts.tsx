@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const topSellingProducts = [
   {
@@ -150,6 +150,7 @@ const topSellingProducts = [
 ];
 
 const TopSellingProducts = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -246,7 +247,7 @@ const TopSellingProducts = () => {
                   ...getCardStyle(index),
                   transformStyle: 'preserve-3d'
                 }}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => navigate(`/product-details/${product.id}`)}
               >
                 <div className="relative w-80 h-[500px] rounded-3xl overflow-hidden shadow-2xl bg-white border-4 border-white/20">
                   {/* Product Image Container */}
@@ -358,7 +359,10 @@ const TopSellingProducts = () => {
 
         {/* CTA Button */}
         <div className="text-center mt-16">
-          <Button className="bg-gradient-to-r from-orange-800 to-red-800 hover:from-orange-900 hover:to-red-900 text-white px-10 py-5 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all border-2 border-orange-700/30 font-semibold">
+          <Button 
+            onClick={() => navigate('/shop')}
+            className="bg-gradient-to-r from-orange-800 to-red-800 hover:from-orange-900 hover:to-red-900 text-white px-10 py-5 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all border-2 border-orange-700/30 font-semibold"
+          >
             <Tag className="h-6 w-6 mr-3" />
             Shop All Bestsellers
           </Button>

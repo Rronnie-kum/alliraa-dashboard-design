@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const LifestyleBanner = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative h-screen bg-gradient-to-br from-amber-100 to-orange-200 overflow-hidden">
       <div 
@@ -22,7 +25,10 @@ const LifestyleBanner = () => {
           <p className="text-xl mb-8 opacity-90">
             We'll choose the perfect gift box for your present and completely free.
           </p>
-          <Button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-amber-900 px-8 py-3 text-lg font-medium rounded-full">
+          <Button 
+            onClick={() => navigate('/shop')}
+            className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-amber-900 px-8 py-3 text-lg font-medium rounded-full"
+          >
             EXPLORE NOW
           </Button>
         </div>

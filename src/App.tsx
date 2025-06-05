@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
+import ProductDetails from "./pages/ProductDetails";
 import Kurti from "./pages/Kurti";
 import LikedProducts from "./pages/LikedProducts";
 import About from "./pages/About";
@@ -35,6 +36,7 @@ const App: React.FC = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/product" element={<Product />} />
+            <Route path="/product-details/:id" element={<ProductDetails />} />
             <Route path="/kurti" element={<Kurti />} />
             <Route path="/liked-products" element={<LikedProducts />} />
             <Route path="/about" element={<About />} />

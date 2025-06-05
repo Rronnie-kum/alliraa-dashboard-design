@@ -2,6 +2,7 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductCardProps {
   id: string;
@@ -14,6 +15,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
+  id,
   name,
   price,
   originalPrice,
@@ -21,8 +23,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
   badge,
   rating = 5
 }) => {
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    navigate(`/product-details/${id}`);
+  };
+
   return (
-    <div className="group cursor-pointer">
+    <div className="group cursor-pointer" onClick={handleProductClick}>
       <div className="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200">
         <img
           src={image}
@@ -38,6 +46,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
           variant="ghost" 
           size="sm" 
           className="absolute top-3 right-3 bg-white/80 hover:bg-white"
+          onClick={(e) => {
+            e.stopPropagation();
+            // Handle wishlist functionality
+          }}
         >
           <Heart className="h-4 w-4" />
         </Button>
