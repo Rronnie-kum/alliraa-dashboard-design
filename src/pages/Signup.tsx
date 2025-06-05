@@ -9,24 +9,37 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import Logo from '@/components/Logo';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Signup = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: e.target.value
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate login process
     try {
-      console.log('Login attempt:', { email, password });
+      console.log('Signup attempt:', formData);
       
-      // Basic validation
-      if (!email || !password) {
+      // Form validation
+      if (!formData.firstName || !formData.lastName || !formData.email || !formData.password || !formData.confirmPassword) {
         toast({
           title: "Error",
           description: "Please fill in all fields.",
@@ -35,23 +48,50 @@ const Login = () => {
         return;
       }
 
+      if (formData.password !== formData.confirmPassword) {
+        toast({
+          title: "Error",
+          description: "Passwords do not match.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (formData.password.length < 6) {
+        toast({
+          title: "Error",
+          description: "Password must be at least 6 characters long.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (!agreeToTerms) {
+        toast({
+          title: "Error",
+          description: "Please agree to the terms and conditions.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast({
         title: "Success",
-        description: "Login successful! Redirecting...",
+        description: "Account created successfully! Please check your email to verify your account.",
       });
       
-      // Redirect to home page after successful login
+      // Redirect to login page after successful signup
       setTimeout(() => {
-        navigate('/');
-      }, 1000);
+        navigate('/login');
+      }, 2000);
       
     } catch (error) {
       toast({
         title: "Error",
-        description: "Login failed. Please try again.",
+        description: "Signup failed. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -59,37 +99,20 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleSignup = () => {
     toast({
-      title: "Google Login",
+      title: "Google Signup",
       description: "Google authentication would be implemented here with OAuth.",
     });
-    console.log('Google login clicked');
+    console.log('Google signup clicked');
   };
 
-  const handleFacebookLogin = () => {
+  const handleFacebookSignup = () => {
     toast({
-      title: "Facebook Login",
+      title: "Facebook Signup",
       description: "Facebook authentication would be implemented here with OAuth.",
     });
-    console.log('Facebook login clicked');
-  };
-
-  const handleForgotPassword = () => {
-    if (!email) {
-      toast({
-        title: "Email Required",
-        description: "Please enter your email address first.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    toast({
-      title: "Password Reset",
-      description: `Password reset link sent to ${email}`,
-    });
-    console.log('Forgot password clicked for:', email);
+    console.log('Facebook signup clicked');
   };
 
   return (
@@ -146,7 +169,7 @@ const Login = () => {
         </div>
       </header>
 
-      {/* Login Form Content */}
+      {/* Signup Form Content */}
       <div className="flex items-center justify-center p-4 pt-12">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-40">
@@ -170,14 +193,45 @@ const Login = () => {
               <div className="flex justify-center mb-4">
                 <Logo className="text-3xl" />
               </div>
-              <CardTitle className="text-2xl font-bold text-gray-900">Welcome Back</CardTitle>
+              <CardTitle className="text-2xl font-bold text-gray-900">Create Account</CardTitle>
               <CardDescription className="text-gray-600">
-                Sign in to your ALLIRAA account to continue
+                Join ALLIRAA and start your fashion journey
               </CardDescription>
             </CardHeader>
             
             <CardContent className="space-y-6">
               <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName" className="text-gray-700 font-medium">
+                      First Name
+                    </Label>
+                    <Input
+                      id="firstName"
+                      type="text"
+                      placeholder="Enter first name"
+                      value={formData.firstName}
+                      onChange={handleInputChange('firstName')}
+                      className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName" className="text-gray-700 font-medium">
+                      Last Name
+                    </Label>
+                    <Input
+                      id="lastName"
+                      type="text"
+                      placeholder="Enter last name"
+                      value={formData.lastName}
+                      onChange={handleInputChange('lastName')}
+                      className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-gray-700 font-medium">
                     Email Address
@@ -186,8 +240,8 @@ const Login = () => {
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={formData.email}
+                    onChange={handleInputChange('email')}
                     className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
                     required
                   />
@@ -201,9 +255,9 @@ const Login = () => {
                     <Input
                       id="password"
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Create a password"
+                      value={formData.password}
+                      onChange={handleInputChange('password')}
                       className="border-gray-300 focus:border-amber-500 focus:ring-amber-500 pr-10"
                       required
                     />
@@ -222,22 +276,55 @@ const Login = () => {
                     </Button>
                   </div>
                 </div>
-                
-                <div className="flex items-center justify-between">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword" className="text-gray-700 font-medium">
+                    Confirm Password
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="confirmPassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      placeholder="Confirm your password"
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange('confirmPassword')}
+                      className="border-gray-300 focus:border-amber-500 focus:ring-amber-500 pr-10"
+                      required
                     />
-                    <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-4 w-4 text-gray-400" />
+                      ) : (
+                        <Eye className="h-4 w-4 text-gray-400" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-2">
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    checked={agreeToTerms}
+                    onChange={(e) => setAgreeToTerms(e.target.checked)}
+                    className="rounded border-gray-300 text-amber-600 focus:ring-amber-500 mt-1"
+                  />
+                  <label htmlFor="terms" className="text-sm text-gray-600">
+                    I agree to the{' '}
+                    <a href="#" className="text-amber-800 hover:text-amber-900 underline">
+                      Terms and Conditions
+                    </a>{' '}
+                    and{' '}
+                    <a href="#" className="text-amber-800 hover:text-amber-900 underline">
+                      Privacy Policy
+                    </a>
                   </label>
-                  <button 
-                    type="button"
-                    onClick={handleForgotPassword}
-                    className="text-sm text-amber-800 hover:text-amber-900 transition-colors"
-                  >
-                    Forgot password?
-                  </button>
                 </div>
                 
                 <Button
@@ -245,7 +332,7 @@ const Login = () => {
                   disabled={isLoading}
                   className="w-full bg-amber-800 hover:bg-amber-900 text-white py-2.5 transition-colors"
                 >
-                  {isLoading ? 'Signing In...' : 'Sign In'}
+                  {isLoading ? 'Creating Account...' : 'Create Account'}
                 </Button>
               </form>
               
@@ -254,7 +341,7 @@ const Login = () => {
                   <span className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-2 text-gray-500">Or continue with</span>
+                  <span className="bg-white px-2 text-gray-500">Or sign up with</span>
                 </div>
               </div>
               
@@ -262,7 +349,7 @@ const Login = () => {
                 <Button 
                   variant="outline" 
                   className="border-gray-300"
-                  onClick={handleGoogleLogin}
+                  onClick={handleGoogleSignup}
                   type="button"
                 >
                   <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
@@ -276,7 +363,7 @@ const Login = () => {
                 <Button 
                   variant="outline" 
                   className="border-gray-300"
-                  onClick={handleFacebookLogin}
+                  onClick={handleFacebookSignup}
                   type="button"
                 >
                   <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -287,12 +374,12 @@ const Login = () => {
               </div>
               
               <div className="text-center">
-                <span className="text-gray-600">Don't have an account? </span>
+                <span className="text-gray-600">Already have an account? </span>
                 <Link 
-                  to="/signup" 
+                  to="/login" 
                   className="text-amber-800 hover:text-amber-900 font-medium transition-colors"
                 >
-                  Sign up
+                  Sign in
                 </Link>
               </div>
             </CardContent>
@@ -307,4 +394,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
