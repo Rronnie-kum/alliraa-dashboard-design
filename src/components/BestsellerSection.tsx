@@ -1,47 +1,37 @@
-
 import React from 'react';
-import ProductCard from './ProductCard';
+import ProductCard from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
-const bestsellers = [
+const bestsellerProducts = [
   {
-    id: '1',
-    name: 'Jadeite Spaghetti Strap',
-    price: 150,
-    image: 'https://images.unsplash.com/photo-1506629905587-4b47d3cb0ee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    id: '101',
+    name: 'Cashmere Sweater',
+    price: 175,
+    image: 'https://images.unsplash.com/photo-1607346256330-dee79c7162e6?w=400&h=400&fit=crop',
     rating: 5
   },
   {
-    id: '2',
-    name: 'Sassy Shoulder Bra',
-    price: 120,
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-    rating: 5
-  },
-  {
-    id: '3',
-    name: 'Sierra Square Neck Top',
-    price: 200,
-    originalPrice: 250,
-    image: 'https://images.unsplash.com/photo-1588117305388-c2631a279f82?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-    badge: '-20%',
-    rating: 5
-  },
-  {
-    id: '4',
-    name: 'Egrimma Top',
+    id: '102',
+    name: 'Leather Ankle Boots',
     price: 220,
-    image: 'https://images.unsplash.com/photo-1594736797933-d0e3e8aa8c9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+    rating: 4
+  },
+  {
+    id: '103',
+    name: 'Silk Scarf',
+    price: 85,
+    image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=400&fit=crop',
     rating: 5
   },
   {
-    id: '5',
-    name: 'Mariah Pocket Short',
-    price: 185,
-    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-    rating: 5
-  }
+    id: '104',
+    name: 'Wool Coat',
+    price: 350,
+    image: 'https://images.unsplash.com/photo-1547582337-498599979299?w=400&h=400&fit=crop',
+    rating: 4
+  },
 ];
 
 const BestsellerSection = () => {
@@ -51,18 +41,20 @@ const BestsellerSection = () => {
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900">Our Bestsellers</h2>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Bestseller Collections</h2>
+            <p className="text-gray-600">Our most loved pieces from premium collections</p>
+          </div>
           <Button 
-            onClick={() => navigate('/shop')}
             variant="outline" 
-            className="border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white"
+            className="hover:bg-amber-50 hover:border-amber-300"
+            onClick={() => navigate('/collections')}
           >
-            View All →
+            Shop All Collections
           </Button>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-          {bestsellers.map((product) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {bestsellerProducts.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </div>
