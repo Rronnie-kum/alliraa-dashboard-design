@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -8,7 +9,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Cart from "./pages/Cart";
-import Collections from "./pages/Collections";
+import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import ProductDetails from "./pages/ProductDetails";
 import Kurti from "./pages/Kurti";
@@ -33,8 +34,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/collections" element={<Collections />} />
-            <Route path="/shop" element={<Collections />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/product" element={<Product />} />
             <Route path="/product-details/:id" element={<ProductDetails />} />
             <Route path="/kurti" element={<Kurti />} />
