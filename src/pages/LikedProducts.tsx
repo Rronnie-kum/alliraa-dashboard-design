@@ -48,113 +48,91 @@ const LikedProducts = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      {/* Hero Section - Matching home page style */}
-      <section className="bg-gradient-to-r from-blue-100 to-teal-100 py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-8">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-r from-pink-50 via-rose-50 to-red-50 py-16 overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          <div className="w-full h-full bg-pink-100"></div>
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center mb-6">
             <Link to="/kurti">
-              <Button variant="ghost" className="mr-4">
+              <Button variant="ghost" className="mr-4 hover:bg-white/80">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Collections
+                Back to Kurtis
               </Button>
             </Link>
           </div>
-          
           <div className="text-center">
-            <h1 className="text-5xl font-bold text-gray-900 mb-8">
-              Your Favorite Products
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12">
-              All your loved items in one place. Continue shopping or add them to your cart.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg"
-              >
-                <ShoppingBag className="h-5 w-5 mr-2" />
-                Add All to Cart
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 text-lg"
-              >
-                Continue Shopping
-              </Button>
+            <div className="inline-flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-pink-800 mb-6">
+              <Heart className="h-4 w-4 mr-2 text-pink-500 fill-pink-500" />
+              Your Favorites
             </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Liked <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600">Products</span>
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              All your favorite kurtis in one place. Shop your wishlisted items and never miss out on the styles you love.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Statistics Section */}
-      <section className="py-16 bg-white">
+      <section className="py-8 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-8 w-8 text-white fill-white" />
-              </div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">{likedProducts.length}</div>
-              <div className="text-gray-600">Loved Items</div>
+              <div className="text-3xl font-bold text-pink-600 mb-2">{likedProducts.length}</div>
+              <div className="text-gray-600">Liked Items</div>
             </div>
-            
             <div className="text-center">
-              <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ShoppingBag className="h-8 w-8 text-white" />
-              </div>
-              <div className="text-3xl font-bold text-teal-600 mb-2">
+              <div className="text-3xl font-bold text-green-600 mb-2">
                 ${likedProducts.reduce((total, product) => total + (product.originalPrice || product.price), 0)}
               </div>
               <div className="text-gray-600">Total Value</div>
             </div>
-            
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-lg">%</span>
-              </div>
-              <div className="text-3xl font-bold text-green-600 mb-2">
+              <div className="text-3xl font-bold text-blue-600 mb-2">
                 ${likedProducts.reduce((total, product) => total + (product.originalPrice || product.price) - product.price, 0)}
               </div>
-              <div className="text-gray-600">You Save</div>
+              <div className="text-gray-600">Potential Savings</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Controls Section */}
-      <section className="py-8 bg-gray-100 border-y border-gray-200">
+      <section className="py-6 bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" className="flex items-center space-x-2">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
+              <Button variant="outline" className="flex items-center gap-2 bg-white hover:bg-gray-50">
                 <Filter className="h-4 w-4" />
-                <span>Filter</span>
+                Filter by Category
               </Button>
-              <span className="text-gray-600">{likedProducts.length} items</span>
+              <Button className="bg-pink-600 hover:bg-pink-700 text-white">
+                <ShoppingBag className="h-4 w-4 mr-2" />
+                Add All to Cart
+              </Button>
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">View:</span>
-              <div className="flex bg-white rounded-lg border border-gray-300">
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => setViewMode('grid')}
-                  className={viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-gray-600'}
-                >
-                  <Grid className="h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  className={viewMode === 'list' ? 'bg-blue-600 text-white' : 'text-gray-600'}
-                >
-                  <List className="h-4 w-4" />
-                </Button>
-              </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600 mr-3">View:</span>
+              <Button 
+                variant={viewMode === 'grid' ? 'default' : 'ghost'} 
+                size="sm"
+                onClick={() => setViewMode('grid')}
+                className={viewMode === 'grid' ? 'bg-pink-600 hover:bg-pink-700' : ''}
+              >
+                <Grid className="h-4 w-4" />
+              </Button>
+              <Button 
+                variant={viewMode === 'list' ? 'default' : 'ghost'} 
+                size="sm"
+                onClick={() => setViewMode('list')}
+                className={viewMode === 'list' ? 'bg-pink-600 hover:bg-pink-700' : ''}
+              >
+                <List className="h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>
@@ -165,19 +143,28 @@ const LikedProducts = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {likedProducts.length > 0 ? (
             <>
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  Your Liked Products ({likedProducts.length})
+                </h2>
+                <p className="text-gray-600">
+                  Items you've marked as favorites
+                </p>
+              </div>
+              
               <div className={`grid gap-8 ${viewMode === 'grid' 
                 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
                 : 'grid-cols-1 lg:grid-cols-2'
               }`}>
                 {likedProducts.map((product) => (
-                  <div key={product.id} className="relative">
-                    <div className="absolute top-3 right-3 z-10">
+                  <div key={product.id} className="group relative">
+                    <div className="absolute top-2 right-2 z-10">
                       <Button 
                         variant="ghost" 
                         size="sm" 
-                        className="bg-white/80 hover:bg-white"
+                        className="bg-white/90 hover:bg-white shadow-md"
                       >
-                        <Heart className="h-4 w-4 text-red-500 fill-red-500" />
+                        <Heart className="h-4 w-4 text-pink-500 fill-pink-500" />
                       </Button>
                     </div>
                     <ProductCard {...product} />
@@ -186,26 +173,25 @@ const LikedProducts = () => {
               </div>
 
               <div className="text-center mt-12">
-                <Link to="/collections">
-                  <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
-                    Discover More
+                <Link to="/kurti">
+                  <Button variant="outline" className="px-8 py-3">
+                    Continue Shopping
                   </Button>
                 </Link>
               </div>
             </>
           ) : (
             <div className="text-center py-20">
-              <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Heart className="h-12 w-12 text-blue-600" />
-              </div>
+              <Heart className="h-16 w-16 text-gray-300 mx-auto mb-6" />
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 No Liked Products Yet
               </h3>
-              <p className="text-gray-600 mb-8">
-                Start exploring our collection and like the products you love.
+              <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                Start browsing our collection and heart the items you love to see them here.
               </p>
-              <Link to="/collections">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Link to="/kurti">
+                <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3">
+                  <ShoppingBag className="h-4 w-4 mr-2" />
                   Start Shopping
                 </Button>
               </Link>
@@ -222,10 +208,9 @@ const LikedProducts = () => {
               You Might Also Like
             </h2>
             <p className="text-gray-600">
-              Discover more products based on your preferences
+              Similar styles based on your preferences
             </p>
           </div>
-          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
@@ -259,14 +244,6 @@ const LikedProducts = () => {
             ].map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <Link to="/collections">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                View All Products
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
