@@ -315,7 +315,6 @@ const Collections = () => {
                   <ProductCard 
                     key={product.id} 
                     {...product}
-                    className={viewMode === 'list' ? 'flex-row' : ''}
                   />
                 ))}
               </div>
