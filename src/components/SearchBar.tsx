@@ -13,7 +13,7 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ 
   onSearch, 
-  placeholder = "Search products, collections...",
+  placeholder = "Search collections, products...",
   className = ""
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,14 +42,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const searchSuggestions = [
-    'Kurti sets',
-    'Cotton kurtis',
-    'Silk kurtis',
+    'Kurti collections',
+    'Designer dresses',
+    'Cotton tops',
+    'Silk collections',
     'Embroidered wear',
-    'Printed kurtis',
-    'Designer collection',
-    'Summer collection',
-    'Party wear'
+    'Printed collections',
+    'Summer collections',
+    'Party wear collections'
   ];
 
   return (
@@ -82,7 +82,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         )}
       </div>
       
-      {/* Search Suggestions (when expanded and has query) */}
+      {/* Search Suggestions */}
       {isExpanded && searchQuery && (
         <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-auto">
           <div className="p-2">
