@@ -8,6 +8,7 @@ import TopSellingProducts from '@/components/TopSellingProducts';
 import PromotionalBanners from '@/components/PromotionalBanners';
 import ShopTheLookSection from '@/components/ShopTheLookSection';
 import LifestyleBanner from '@/components/LifestyleBanner';
+import CustomerReviews from '@/components/CustomerReviews';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
       <PromotionalBanners />
       <ShopTheLookSection />
       <LifestyleBanner />
+      <CustomerReviews />
       <Footer />
     </div>
   );
