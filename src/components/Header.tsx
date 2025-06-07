@@ -1,15 +1,19 @@
 
 import React from 'react';
-import { ShoppingBag, User, Menu } from 'lucide-react';
+import { ShoppingBag, User, Menu, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const handleSearch = (query: string) => {
     console.log('Search query:', query);
-    // Add search logic here - could navigate to search results page
+    // Navigate to shop page with search query
+    navigate(`/shop?search=${encodeURIComponent(query)}`);
   };
 
   return (
@@ -17,7 +21,9 @@ const Header = () => {
       {/* Promo Bar */}
       <div className="bg-amber-800 text-white text-center py-2 text-sm">
         <span>New Collection—every friday 75% Off. </span>
-        <span className="font-semibold underline cursor-pointer">Shop Sale</span>
+        <Link to="/shop" className="font-semibold underline cursor-pointer hover:text-amber-200">
+          Shop Sale
+        </Link>
       </div>
       
       {/* Main Header */}

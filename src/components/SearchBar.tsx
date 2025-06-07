@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchBarProps {
   onSearch?: (query: string) => void;
@@ -17,11 +18,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
       console.log('Searching for:', searchQuery);
       onSearch?.(searchQuery);
+      // Navigate to shop page with search query
+      navigate(`/shop?search=${encodeURIComponent(searchQuery)}`);
+      setIsExpanded(false);
     }
   };
 
@@ -35,6 +40,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setSearchQuery('');
     setIsExpanded(false);
   };
+
+  const searchSuggestions = [
+    'Kurti sets',
+    'Cotton kurtis',
+    'Silk kurtis',
+    'Embroidered wear',
+    'Printed kurtis',
+    'Designer collection',
+    'Summer collection',
+    'Party wear'
+  ];
 
   return (
     <div className={`relative ${className}`}>
@@ -71,21 +87,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-auto">
           <div className="p-2">
             <div className="text-sm text-gray-500 mb-2">Quick suggestions:</div>
-            {[
-              'Athletic wear',
-              'Yoga pants',
-              'Sports bras',
-              'Running shoes',
-              'Workout tops'
-            ].filter(item => 
+            {searchSuggestions.filter(item => 
               item.toLowerCase().includes(searchQuery.toLowerCase())
             ).map((suggestion, index) => (
               <div
                 key={index}
-                className="px-3 py-2 hover:bg-gray-50 cursor-pointer rounded text-sm"
+                className="px-3 py-2 hover:bg-gray-50 cursor-pointer rounded text-sm transition-colors duration-150"
                 onClick={() => {
                   setSearchQuery(suggestion);
-                  handleSearch();
+                  navigate(`/shop?search=${encodeURIComponent(suggestion)}`);
                   setIsExpanded(false);
                 }}
               >

@@ -29,6 +29,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
     navigate(`/product-details/${id}`);
   };
 
+  const handleWishlistClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Navigate to liked products page or add to wishlist
+    navigate('/liked-products');
+  };
+
   return (
     <div className="group cursor-pointer" onClick={handleProductClick}>
       <div className="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200">
@@ -45,11 +51,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Button 
           variant="ghost" 
           size="sm" 
-          className="absolute top-3 right-3 bg-white/80 hover:bg-white"
-          onClick={(e) => {
-            e.stopPropagation();
-            // Handle wishlist functionality
-          }}
+          className="absolute top-3 right-3 bg-white/80 hover:bg-white transition-all duration-200"
+          onClick={handleWishlistClick}
         >
           <Heart className="h-4 w-4" />
         </Button>

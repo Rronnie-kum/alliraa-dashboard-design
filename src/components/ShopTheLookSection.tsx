@@ -2,6 +2,7 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import {
   Carousel,
   CarouselContent,
@@ -21,14 +22,18 @@ interface LookCard {
   title: string;
   images: ProductImage[];
   price?: string;
+  category: string;
 }
 
 const ShopTheLookSection = () => {
+  const navigate = useNavigate();
+
   const lookCards: LookCard[] = [
     {
       id: '1',
       title: 'Summer Essentials',
       price: 'From $29',
+      category: 'summer',
       images: [
         { id: '1a', url: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop', alt: 'Summer top' },
         { id: '1b', url: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=200&fit=crop', alt: 'Summer bottoms' },
@@ -39,6 +44,7 @@ const ShopTheLookSection = () => {
       id: '2',
       title: 'Casual Comfort',
       price: 'From $45',
+      category: 'casual',
       images: [
         { id: '2a', url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=400&h=280&fit=crop', alt: 'Casual shirt' },
         { id: '2b', url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=180&fit=crop', alt: 'Casual pants' },
@@ -50,6 +56,7 @@ const ShopTheLookSection = () => {
       id: '3',
       title: 'Evening Elegance',
       price: 'From $89',
+      category: 'evening',
       images: [
         { id: '3a', url: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=320&fit=crop', alt: 'Evening dress' },
         { id: '3b', url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=400&h=180&fit=crop', alt: 'Evening heels' },
@@ -60,6 +67,7 @@ const ShopTheLookSection = () => {
       id: '4',
       title: 'Urban Street',
       price: 'From $35',
+      category: 'street',
       images: [
         { id: '4a', url: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=260&fit=crop', alt: 'Street jacket' },
         { id: '4b', url: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=200&fit=crop', alt: 'Street jeans' },
@@ -70,6 +78,7 @@ const ShopTheLookSection = () => {
       id: '5',
       title: 'Boho Chic',
       price: 'From $52',
+      category: 'boho',
       images: [
         { id: '5a', url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=400&h=300&fit=crop', alt: 'Boho dress' },
         { id: '5b', url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=160&fit=crop', alt: 'Boho sandals' },
@@ -146,6 +155,7 @@ const ShopTheLookSection = () => {
                       <Button
                         size="sm"
                         className="bg-amber-800 hover:bg-amber-900 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                        onClick={() => navigate(`/shop?category=${look.category}`)}
                       >
                         <ShoppingBag className="h-4 w-4 mr-1" />
                         Shop All

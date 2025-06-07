@@ -53,9 +53,9 @@ const BestsellerSection = () => {
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900">Our Bestsellers</h2>
           <Button 
-            onClick={() => navigate('/shop')}
+            onClick={() => navigate('/shop?category=bestsellers')}
             variant="outline" 
-            className="border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white"
+            className="border-amber-800 text-amber-800 hover:bg-amber-800 hover:text-white transition-all duration-300"
           >
             View All →
           </Button>
