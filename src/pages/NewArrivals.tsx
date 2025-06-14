@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CollectionHero from '@/components/collections/CollectionHero';
@@ -10,6 +10,9 @@ import useProductFilter from '@/hooks/useProductFilter';
 import { productData } from '@/models/product';
 
 const NewArrivals = () => {
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFilters, setShowFilters] = useState(false);
+
   // Filter products to show only new arrivals (products with badge 'NEW')
   const newArrivalProducts = productData.filter(product => 
     product.badge === 'NEW' || product.badge === 'Bestseller' || product.badge === 'Premium'
@@ -38,32 +41,21 @@ const NewArrivals = () => {
     initialCategory: 'all'
   });
 
-  const heroData = {
-    title: "New Arrivals Collection",
-    subtitle: "Discover the Latest Fashion Trends",
-    description: "Fresh styles that just landed in our collection. Be the first to wear what's next in fashion.",
-    backgroundImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
-    badge: "Fresh Arrivals"
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <CollectionHero {...heroData} />
+      <CollectionHero />
       
       <CollectionControls
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
         sortBy={sortBy}
         setSortBy={setSortBy}
-        selectedColors={selectedColors}
-        setSelectedColors={setSelectedColors}
-        selectedSizes={selectedSizes}
-        setSelectedSizes={setSelectedSizes}
-        onClearFilters={clearAllFilters}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+        setShowFilters={setShowFilters}
+        showFilters={showFilters}
       />
       
       <ProductGrid
