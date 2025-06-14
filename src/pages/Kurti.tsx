@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -304,17 +303,6 @@ const Kurti = () => {
           </div>
         </div>
       </section>
-
-      {/* Filters Panel */}
-      {showFilters && (
-        <KurtiFilters 
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          priceRange={priceRange}
-          setPriceRange={setPriceRange}
-          onClose={() => setShowFilters(false)}
-        />
-      )}
 
       {/* Enhanced Products Grid */}
       <section className="py-16 bg-white">
