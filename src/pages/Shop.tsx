@@ -194,12 +194,12 @@ const Shop = () => {
   ];
 
   const categories = [
-    { id: 'all', name: 'All Items', count: '500+', color: 'bg-gradient-to-br from-purple-500 to-pink-500' },
-    { id: 'kurti', name: 'Kurtis', count: '120+', color: 'bg-gradient-to-br from-blue-500 to-cyan-500' },
-    { id: 'tops', name: 'Tops', count: '85+', color: 'bg-gradient-to-br from-yellow-500 to-orange-500' },
-    { id: 'dresses', name: 'Dresses', count: '95+', color: 'bg-gradient-to-br from-green-500 to-teal-500' },
-    { id: 'bottoms', name: 'Bottoms', count: '150+', color: 'bg-gradient-to-br from-red-500 to-pink-500' },
-    { id: 'accessories', name: 'Accessories', count: '60+', color: 'bg-gradient-to-br from-indigo-500 to-purple-500' }
+    { id: 'all', name: 'All Collections', count: '500+', color: 'bg-gradient-to-br from-purple-500 to-pink-500' },
+    { id: 'kurti', name: 'Kurti Collections', count: '120+', color: 'bg-gradient-to-br from-blue-500 to-cyan-500' },
+    { id: 'tops', name: 'Top Collections', count: '85+', color: 'bg-gradient-to-br from-yellow-500 to-orange-500' },
+    { id: 'dresses', name: 'Dress Collections', count: '95+', color: 'bg-gradient-to-br from-green-500 to-teal-500' },
+    { id: 'bottoms', name: 'Bottom Collections', count: '150+', color: 'bg-gradient-to-br from-red-500 to-pink-500' },
+    { id: 'accessories', name: 'Accessory Collections', count: '60+', color: 'bg-gradient-to-br from-indigo-500 to-purple-500' }
   ];
 
   // Filter and sort products
@@ -288,19 +288,19 @@ const Shop = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-amber-800 mb-6">
             <Star className="h-4 w-4 mr-2 text-yellow-500" />
-            Curated Collections
+            Premium Collections
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Fashion <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">Collections</span>
+            Curated <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">Collections</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
-            Discover our handpicked collections of premium fashion items, 
+            Explore our handpicked collections of premium fashion items, 
             carefully curated for style, quality, and modern elegance
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all">
               <ShoppingCart className="h-5 w-5 mr-2" />
-              Shop Now
+              Browse Collections
             </Button>
             <Link to="/about">
               <Button 
@@ -319,10 +319,10 @@ const Shop = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Shop by Collection
+              Browse Collections
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Find your perfect style from our diverse collections
+              Discover your perfect style from our diverse collections
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -363,7 +363,7 @@ const Shop = () => {
                 className="flex items-center gap-2 bg-white hover:bg-gray-50"
               >
                 <SlidersHorizontal className="h-4 w-4" />
-                All Filters
+                Collection Filters
               </Button>
               <Link to="/liked-products">
                 <Button variant="outline" className="flex items-center gap-2 bg-white hover:bg-pink-50 border-pink-200 text-pink-600 hover:text-pink-700">
@@ -376,11 +376,11 @@ const Shop = () => {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
               >
-                <option value="featured">Sort by: Featured</option>
+                <option value="featured">Sort by: Featured Collections</option>
                 <option value="price-low-high">Price: Low to High</option>
                 <option value="price-high-low">Price: High to Low</option>
                 <option value="rating">Customer Rating</option>
-                <option value="newest">Newest First</option>
+                <option value="newest">Newest Collections</option>
               </select>
               <select 
                 value={priceRange}
@@ -438,10 +438,10 @@ const Shop = () => {
           <div className="flex justify-between items-center mb-12">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                {selectedCategory === 'all' ? 'All Collections' : `${categories.find(c => c.id === selectedCategory)?.name || 'Products'}`}
+                {selectedCategory === 'all' ? 'All Collections' : `${categories.find(c => c.id === selectedCategory)?.name || 'Collections'}`}
               </h2>
               <p className="text-gray-600">
-                Showing {startIndex + 1}-{Math.min(endIndex, filteredAndSortedProducts.length)} of {filteredAndSortedProducts.length} products
+                Showing {startIndex + 1}-{Math.min(endIndex, filteredAndSortedProducts.length)} of {filteredAndSortedProducts.length} items
               </p>
             </div>
             <div className="text-sm text-gray-500">
@@ -505,7 +505,7 @@ const Shop = () => {
 
           {filteredAndSortedProducts.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
+              <p className="text-gray-500 text-lg">No collections found matching your criteria.</p>
               <Button 
                 onClick={() => {
                   setSelectedCategory('all');
@@ -531,7 +531,7 @@ const Shop = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Heart className="h-4 w-4 mr-2" />
-            Limited Time Offer
+            Limited Time Collection Sale
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Exclusive Collections Sale
@@ -541,13 +541,13 @@ const Shop = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="bg-white text-orange-800 hover:bg-gray-100 px-8 py-4 text-lg rounded-full font-semibold">
-              Shop Sale
+              Browse Sale Collections
             </Button>
             <Button 
               variant="outline" 
               className="border-2 border-white text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full"
             >
-              View Offers
+              View Special Offers
             </Button>
           </div>
         </div>
