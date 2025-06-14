@@ -45,91 +45,91 @@ const LikedProducts = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-amber-50">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-pink-50 via-rose-50 to-red-50 py-16 overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="w-full h-full bg-pink-100"></div>
+      {/* Hero Section with Amber Theme */}
+      <section className="relative bg-gradient-to-br from-amber-100 via-amber-50 to-orange-100 py-16 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="w-full h-full bg-gradient-to-r from-amber-200 to-orange-200"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-6">
             <Link to="/kurti">
-              <Button variant="ghost" className="mr-4 hover:bg-white/80">
+              <Button variant="outline" className="mr-4 border-amber-300 text-amber-800 hover:bg-amber-100">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Kurtis
               </Button>
             </Link>
           </div>
           <div className="text-center">
-            <div className="inline-flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-pink-800 mb-6">
-              <Heart className="h-4 w-4 mr-2 text-pink-500 fill-pink-500" />
-              Your Favorites
+            <div className="inline-flex items-center bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full text-sm font-medium text-amber-800 mb-6 shadow-sm border border-amber-200">
+              <Heart className="h-5 w-5 mr-2 text-amber-600 fill-amber-600" />
+              Your Favorites Collection
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Liked <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600">Products</span>
+            <h1 className="text-4xl md:text-6xl font-bold text-amber-900 mb-4">
+              Liked <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">Products</span>
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-amber-700 max-w-2xl mx-auto">
               All your favorite kurtis in one place. Shop your wishlisted items and never miss out on the styles you love.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="py-8 bg-white border-b border-gray-200">
+      {/* Statistics Section with Amber Theme */}
+      <section className="py-8 bg-white border-b border-amber-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-600 mb-2">{likedProducts.length}</div>
-              <div className="text-gray-600">Liked Items</div>
+            <div className="text-center p-6 bg-amber-50 rounded-lg border border-amber-200">
+              <div className="text-3xl font-bold text-amber-700 mb-2">{likedProducts.length}</div>
+              <div className="text-amber-600 font-medium">Liked Items</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">
+            <div className="text-center p-6 bg-green-50 rounded-lg border border-green-200">
+              <div className="text-3xl font-bold text-green-700 mb-2">
                 ${likedProducts.reduce((total, product) => total + (product.originalPrice || product.price), 0)}
               </div>
-              <div className="text-gray-600">Total Value</div>
+              <div className="text-green-600 font-medium">Total Value</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">
+            <div className="text-center p-6 bg-orange-50 rounded-lg border border-orange-200">
+              <div className="text-3xl font-bold text-orange-700 mb-2">
                 ${likedProducts.reduce((total, product) => total + (product.originalPrice || product.price) - product.price, 0)}
               </div>
-              <div className="text-gray-600">Potential Savings</div>
+              <div className="text-orange-600 font-medium">Potential Savings</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Controls Section */}
-      <section className="py-6 bg-gray-50 border-b border-gray-200">
+      {/* Controls Section with Amber Theme */}
+      <section className="py-6 bg-amber-50 border-b border-amber-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="flex flex-wrap items-center gap-4">
-              <Button variant="outline" className="flex items-center gap-2 bg-white hover:bg-gray-50">
+              <Button variant="outline" className="flex items-center gap-2 bg-white hover:bg-amber-50 border-amber-300 text-amber-800">
                 <Filter className="h-4 w-4" />
                 Filter by Category
               </Button>
-              <Button className="bg-pink-600 hover:bg-pink-700 text-white">
+              <Button className="bg-amber-800 hover:bg-amber-900 text-white shadow-md">
                 <ShoppingBag className="h-4 w-4 mr-2" />
                 Add All to Cart
               </Button>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-600 mr-3">View:</span>
+              <span className="text-sm text-amber-700 mr-3 font-medium">View:</span>
               <Button 
-                variant={viewMode === 'grid' ? 'default' : 'ghost'} 
+                variant={viewMode === 'grid' ? 'default' : 'outline'} 
                 size="sm"
                 onClick={() => setViewMode('grid')}
-                className={viewMode === 'grid' ? 'bg-pink-600 hover:bg-pink-700' : ''}
+                className={viewMode === 'grid' ? 'bg-amber-800 hover:bg-amber-900' : 'border-amber-300 text-amber-800 hover:bg-amber-50'}
               >
                 <Grid className="h-4 w-4" />
               </Button>
               <Button 
-                variant={viewMode === 'list' ? 'default' : 'ghost'} 
+                variant={viewMode === 'list' ? 'default' : 'outline'} 
                 size="sm"
                 onClick={() => setViewMode('list')}
-                className={viewMode === 'list' ? 'bg-pink-600 hover:bg-pink-700' : ''}
+                className={viewMode === 'list' ? 'bg-amber-800 hover:bg-amber-900' : 'border-amber-300 text-amber-800 hover:bg-amber-50'}
               >
                 <List className="h-4 w-4" />
               </Button>
@@ -144,10 +144,10 @@ const LikedProducts = () => {
           {likedProducts.length > 0 ? (
             <>
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                <h2 className="text-2xl font-bold text-amber-900 mb-2">
                   Your Liked Products ({likedProducts.length})
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-amber-700">
                   Items you've marked as favorites
                 </p>
               </div>
@@ -162,9 +162,9 @@ const LikedProducts = () => {
                       <Button 
                         variant="ghost" 
                         size="sm" 
-                        className="bg-white/90 hover:bg-white shadow-md"
+                        className="bg-white/90 hover:bg-white shadow-md border border-amber-200"
                       >
-                        <Heart className="h-4 w-4 text-pink-500 fill-pink-500" />
+                        <Heart className="h-4 w-4 text-amber-600 fill-amber-600" />
                       </Button>
                     </div>
                     <ProductCard {...product} />
@@ -174,7 +174,7 @@ const LikedProducts = () => {
 
               <div className="text-center mt-12">
                 <Link to="/kurti">
-                  <Button variant="outline" className="px-8 py-3">
+                  <Button variant="outline" className="px-8 py-3 border-amber-300 text-amber-800 hover:bg-amber-50">
                     Continue Shopping
                   </Button>
                 </Link>
@@ -182,15 +182,17 @@ const LikedProducts = () => {
             </>
           ) : (
             <div className="text-center py-20">
-              <Heart className="h-16 w-16 text-gray-300 mx-auto mb-6" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <div className="bg-amber-100 rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-6">
+                <Heart className="h-16 w-16 text-amber-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-amber-900 mb-4">
                 No Liked Products Yet
               </h3>
-              <p className="text-gray-600 mb-8 max-w-md mx-auto">
+              <p className="text-amber-700 mb-8 max-w-md mx-auto">
                 Start browsing our collection and heart the items you love to see them here.
               </p>
               <Link to="/kurti">
-                <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3">
+                <Button className="bg-amber-800 hover:bg-amber-900 text-white px-8 py-3 shadow-md">
                   <ShoppingBag className="h-4 w-4 mr-2" />
                   Start Shopping
                 </Button>
@@ -200,14 +202,14 @@ const LikedProducts = () => {
         </div>
       </section>
 
-      {/* Recommendations Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Recommendations Section with Amber Theme */}
+      <section className="py-16 bg-gradient-to-br from-amber-50 to-orange-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-amber-900 mb-4">
               You Might Also Like
             </h2>
-            <p className="text-gray-600">
+            <p className="text-amber-700">
               Similar styles based on your preferences
             </p>
           </div>
