@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -24,6 +25,7 @@ import CasualComfort from "./pages/CasualComfort";
 import EveningElegance from "./pages/EveningElegance";
 import UrbanStreet from "./pages/UrbanStreet";
 import BohoChic from "./pages/BohoChic";
+import HealthyLifestyle from "./pages/HealthyLifestyle";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +56,7 @@ const App: React.FC = () => {
               <Route path="/evening-elegance" element={<EveningElegance />} />
               <Route path="/urban-street" element={<UrbanStreet />} />
               <Route path="/boho-chic" element={<BohoChic />} />
+              <Route path="/healthy-lifestyle" element={<HealthyLifestyle />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

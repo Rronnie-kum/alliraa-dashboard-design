@@ -26,7 +26,7 @@ const LifestyleBanner = () => {
             We'll choose the perfect gift box for your present and completely free.
           </p>
           <Button 
-            onClick={() => navigate('/shop')}
+            onClick={() => navigate('/healthy-lifestyle')}
             className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-amber-900 px-8 py-3 text-lg font-medium rounded-full"
           >
             EXPLORE NOW
