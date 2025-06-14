@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -88,14 +88,14 @@ const ShopTheLookSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-8 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
             Shop The Look
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-xl mx-auto">
             Discover curated style collections featuring perfectly matched pieces for every occasion
           </p>
         </div>
@@ -107,7 +107,7 @@ const ShopTheLookSection = () => {
               <CarouselItem key={look.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                 <div className="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                   {/* Image Collage */}
-                  <div className="relative h-96 sm:h-[28rem] p-3">
+                  <div className="relative h-80 p-3">
                     <div className="grid grid-cols-2 gap-2 h-full">
                       {/* Main image - spans full height on left */}
                       <div className="relative overflow-hidden rounded-lg">
@@ -140,14 +140,14 @@ const ShopTheLookSection = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-4 space-y-3">
+                  <div className="p-3 space-y-2">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-semibold text-lg text-gray-900 group-hover:text-amber-800 transition-colors">
+                        <h3 className="font-semibold text-base text-gray-900 group-hover:text-amber-800 transition-colors">
                           {look.title}
                         </h3>
                         {look.price && (
-                          <p className="text-amber-800 font-medium">
+                          <p className="text-amber-800 font-medium text-sm">
                             {look.price}
                           </p>
                         )}
@@ -157,12 +157,12 @@ const ShopTheLookSection = () => {
                         className="bg-amber-800 hover:bg-amber-900 text-white shadow-md hover:shadow-lg transition-all duration-200"
                         onClick={() => navigate(look.route)}
                       >
-                        <ShoppingBag className="h-4 w-4 mr-1" />
+                        <ShoppingBag className="h-3 w-3 mr-1" />
                         Shop All
                       </Button>
                     </div>
                     
-                    <div className="flex items-center text-sm text-gray-500">
+                    <div className="flex items-center text-xs text-gray-500">
                       <span>{look.images.length} pieces</span>
                       <span className="mx-2">•</span>
                       <span>Complete the look</span>
@@ -177,15 +177,6 @@ const ShopTheLookSection = () => {
           <CarouselPrevious className="hidden sm:flex -left-6 bg-white hover:bg-gray-50 border-gray-200 shadow-md" />
           <CarouselNext className="hidden sm:flex -right-6 bg-white hover:bg-gray-50 border-gray-200 shadow-md" />
         </Carousel>
-
-        {/* Mobile scroll indicator */}
-        <div className="flex justify-center mt-6 sm:hidden">
-          <div className="flex space-x-2">
-            {Array.from({ length: Math.ceil(lookCards.length / 1) }).map((_, i) => (
-              <div key={i} className="w-2 h-2 rounded-full bg-gray-300" />
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

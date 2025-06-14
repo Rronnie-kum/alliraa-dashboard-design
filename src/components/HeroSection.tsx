@@ -7,7 +7,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative h-[85vh] overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -20,15 +20,15 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30"></div>
       
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen flex items-center">
-        <div className="text-white max-w-3xl">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="text-white max-w-2xl">
           {/* Badge */}
-          <div className="inline-flex items-center bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-lg animate-pulse">
+          <div className="inline-flex items-center bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-lg animate-pulse">
             FOR A LIMITED TIME
           </div>
           
           {/* Main Heading */}
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
             <span className="block">40% Off</span>
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
               Everything!
@@ -36,21 +36,21 @@ const HeroSection = () => {
           </h1>
           
           {/* Subtext */}
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl">
+          <p className="text-lg md:text-xl mb-6 text-gray-200 max-w-xl">
             Don't miss out on our biggest sale of the year. Premium fashion at unbeatable prices.
           </p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button 
               onClick={() => navigate('/shop')}
-              className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-10 py-4 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl"
+              className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-3 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl"
             >
               SHOP NEW IN
             </Button>
             <Button 
               onClick={() => navigate('/shop')}
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-4 text-lg font-medium rounded-full transition-all duration-300"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 text-lg font-medium rounded-full transition-all duration-300"
             >
               SHOP ALL
             </Button>
@@ -59,8 +59,8 @@ const HeroSection = () => {
       </div>
       
       {/* Decorative Elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-r from-amber-400/20 to-orange-400/20 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-full blur-lg animate-bounce"></div>
+      <div className="absolute top-16 right-16 w-24 h-24 bg-gradient-to-r from-amber-400/20 to-orange-400/20 rounded-full blur-xl animate-pulse"></div>
+      <div className="absolute bottom-16 left-16 w-20 h-20 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-full blur-lg animate-bounce"></div>
     </section>
   );
 };

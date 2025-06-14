@@ -19,16 +19,16 @@ const CategorySection = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+    <section className="py-8 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {categories.map((category) => (
             <div 
               key={category.name} 
               className="text-center group cursor-pointer"
               onClick={() => handleCategoryClick(category.route)}
             >
-              <div className="relative overflow-hidden rounded-full mb-4 aspect-square">
+              <div className="relative overflow-hidden rounded-full mb-3 aspect-square">
                 <img
                   src={category.image}
                   alt={category.name}

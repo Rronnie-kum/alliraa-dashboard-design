@@ -18,15 +18,17 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <HeroSection />
-      <CategorySection />
-      <BestsellerSection />
-      <NewArrivalsSection />
-      <TrendingNowSection />
-      <TopSellingProducts />
-      <PromotionalBanners />
-      <ShopTheLookSection />
-      <LifestyleBanner />
-      <CustomerReviews />
+      <div className="space-y-8">
+        <CategorySection />
+        <BestsellerSection />
+        <NewArrivalsSection />
+        <TrendingNowSection />
+        <TopSellingProducts />
+        <PromotionalBanners />
+        <ShopTheLookSection />
+        <LifestyleBanner />
+        <CustomerReviews />
+      </div>
       <Footer />
     </div>
   );

@@ -34,13 +34,13 @@ const PromotionalBanners = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <section className="py-8 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {promotions.map((promo, index) => (
             <div 
               key={index}
-              className={`relative rounded-2xl overflow-hidden h-96 bg-gradient-to-br ${promo.bgColor} group cursor-pointer`}
+              className={`relative rounded-2xl overflow-hidden h-80 bg-gradient-to-br ${promo.bgColor} group cursor-pointer`}
               onClick={() => navigate(promo.route)}
             >
               <div 
@@ -49,12 +49,12 @@ const PromotionalBanners = () => {
               ></div>
               <div className="absolute inset-0 bg-black/40"></div>
               
-              <div className="relative z-10 p-8 h-full flex flex-col justify-end text-white">
+              <div className="relative z-10 p-6 h-full flex flex-col justify-end text-white">
                 <p className="text-sm font-medium mb-2 tracking-wider">{promo.subtitle}</p>
-                <h3 className="text-2xl font-bold mb-3">{promo.title}</h3>
-                <p className="text-sm mb-4 opacity-90">{promo.description}</p>
+                <h3 className="text-xl font-bold mb-2">{promo.title}</h3>
+                <p className="text-sm mb-3 opacity-90">{promo.description}</p>
                 <Button 
-                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 w-fit rounded-full px-6 transition-all duration-300"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 w-fit rounded-full px-5 py-2 text-sm transition-all duration-300"
                   onClick={(e) => {
                     e.stopPropagation();
                     navigate(promo.route);

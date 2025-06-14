@@ -52,31 +52,31 @@ const NewArrivalsSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-12 bg-gradient-to-br from-amber-50 to-orange-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-8 bg-gradient-to-br from-amber-50 to-orange-100">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-3 rounded-full text-sm font-medium mb-4 shadow-lg">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-3 shadow-lg">
             <Sparkles className="h-4 w-4 mr-2" />
             Fresh Arrivals
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
             New <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">Arrivals</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-xl mx-auto">
             Discover the latest fashion trends that just landed in our collection
           </p>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
           {newArrivals.map((product, index) => (
             <div 
               key={product.id} 
               className="group transform transition-all duration-300 hover:-translate-y-2"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+              <div className="bg-white rounded-2xl p-3 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
                 <ProductCard {...product} />
               </div>
             </div>
@@ -87,16 +87,12 @@ const NewArrivalsSection = () => {
         <div className="text-center">
           <Button 
             onClick={() => navigate('/new-arrivals')}
-            className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-6 py-3 text-base rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
           >
             Explore All New Arrivals
-            <ArrowRight className="h-5 w-5 ml-2" />
+            <ArrowRight className="h-4 w-4 ml-2" />
           </Button>
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-10 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full opacity-10 animate-bounce"></div>
       </div>
     </section>
   );
