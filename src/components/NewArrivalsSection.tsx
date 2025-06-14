@@ -86,7 +86,7 @@ const NewArrivalsSection = () => {
         {/* CTA Section */}
         <div className="text-center">
           <Button 
-            onClick={() => navigate('/shop?category=new-arrivals')}
+            onClick={() => navigate('/new-arrivals')}
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
           >
             Explore All New Arrivals
