@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import ProductCard from './ProductCard';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { TrendingUp, Fire, Star, Heart } from 'lucide-react';
+import { TrendingUp, Flame, Star, Heart } from 'lucide-react';
 
 const trendingProducts = [
   {
@@ -87,7 +86,7 @@ const TrendingNowSection = () => {
       case 'TRENDING':
         return <TrendingUp className="h-3 w-3" />;
       case 'HOT':
-        return <Fire className="h-3 w-3" />;
+        return <Flame className="h-3 w-3" />;
       case 'VIRAL':
         return <Star className="h-3 w-3" />;
       default:
@@ -107,7 +106,7 @@ const TrendingNowSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-lg animate-pulse">
-            <Fire className="h-4 w-4 mr-2" />
+            <Flame className="h-4 w-4 mr-2" />
             What's Hot Right Now
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -191,7 +190,7 @@ const TrendingNowSection = () => {
             onClick={() => navigate('/shop?category=trending')}
             className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-10 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
           >
-            <Fire className="h-5 w-5 mr-2" />
+            <Flame className="h-5 w-5 mr-2" />
             Shop All Trending Items
           </Button>
         </div>
