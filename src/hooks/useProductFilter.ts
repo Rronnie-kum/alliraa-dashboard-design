@@ -1,5 +1,5 @@
 
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import { Product } from '@/models/product';
 
 interface UseProductFilterProps {
@@ -44,10 +44,8 @@ const useProductFilter = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   
-  // Filter and sort products with loading simulation
+  // Filter and sort products without side effects
   const filteredAndSortedProducts = useMemo(() => {
-    setIsLoading(true);
-    
     let filtered = products;
 
     // Filter by category
@@ -105,11 +103,18 @@ const useProductFilter = ({
         // Featured - keep original order
         break;
     }
-
-    // Simulate loading delay
-    setTimeout(() => setIsLoading(false), 300);
     
     return filtered;
+  }, [selectedCategory, priceRange, selectedColors, selectedSizes, sortBy, products]);
+
+  // Handle loading state with useEffect
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [selectedCategory, priceRange, selectedColors, selectedSizes, sortBy, products]);
 
   // Display products based on displayedProducts count
