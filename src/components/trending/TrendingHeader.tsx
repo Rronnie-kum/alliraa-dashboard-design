@@ -4,8 +4,8 @@ import { Flame } from 'lucide-react';
 
 const TrendingHeader = () => {
   return (
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-lg animate-pulse">
+    <div className="text-center mb-10">
+      <div className="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-full text-sm font-medium mb-4 shadow-lg animate-pulse">
         <Flame className="h-4 w-4 mr-2" />
         What's Hot Right Now
       </div>

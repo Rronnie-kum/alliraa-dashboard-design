@@ -12,12 +12,12 @@ const TrendingNowSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-20 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
+    <section className="py-12 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <TrendingHeader />
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
           {trendingProducts.map((product, index) => (
             <div 
               key={product.id} 

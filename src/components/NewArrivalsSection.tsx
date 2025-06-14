@@ -52,11 +52,11 @@ const NewArrivalsSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-gray-100">
+    <section className="py-12 bg-gradient-to-br from-slate-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-lg">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-full text-sm font-medium mb-4 shadow-lg">
             <Sparkles className="h-4 w-4 mr-2" />
             Fresh Arrivals
           </div>
@@ -69,7 +69,7 @@ const NewArrivalsSection = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           {newArrivals.map((product, index) => (
             <div 
               key={product.id} 
