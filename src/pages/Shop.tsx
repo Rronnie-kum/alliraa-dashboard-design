@@ -31,6 +31,8 @@ const Shop = () => {
     filteredAndSortedProducts,
     currentProducts,
     hasMoreProducts,
+    isLoading,
+    isLoadingMore,
     handleViewMore,
     clearAllFilters
   } = useProductFilter({
@@ -89,6 +91,8 @@ const Shop = () => {
         selectedCategory={selectedCategory}
         categoryName={categoryName}
         hasMoreProducts={hasMoreProducts}
+        isLoading={isLoading}
+        isLoadingMore={isLoadingMore}
         onViewMoreClick={handleViewMore}
         onClearFilters={clearAllFilters}
       />

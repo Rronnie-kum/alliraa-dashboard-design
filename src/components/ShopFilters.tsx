@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { X } from 'lucide-react';
+import { X, Loader, Check } from 'lucide-react';
 
 interface ShopFiltersProps {
   selectedCategory: string;
@@ -27,6 +27,8 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
   setSelectedSizes,
   onClose
 }) => {
+  const [isApplying, setIsApplying] = useState(false);
+
   const categories = [
     { id: 'all', name: 'All Items' },
     { id: 'kurti', name: 'Kurtis' },
@@ -84,13 +86,33 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
     setSelectedSizes([]);
   };
 
+  const handleApplyFilters = () => {
+    setIsApplying(true);
+    setTimeout(() => {
+      setIsApplying(false);
+      onClose();
+    }, 500);
+  };
+
+  const hasActiveFilters = selectedCategory !== 'all' || priceRange !== 'all' || selectedColors.length > 0 || selectedSizes.length > 0;
+
   return (
     <div className="bg-gray-50 border-t border-gray-200 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-2xl font-bold text-gray-900">
+            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-2">
               Filter Collections
+              {hasActiveFilters && (
+                <span className="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                  {[
+                    selectedCategory !== 'all' ? 1 : 0,
+                    priceRange !== 'all' ? 1 : 0,
+                    selectedColors.length,
+                    selectedSizes.length
+                  ].reduce((sum, count) => sum + count, 0)} active
+                </span>
+              )}
             </CardTitle>
             <Button variant="ghost" size="sm" onClick={onClose}>
               <X className="h-4 w-4" />
@@ -103,7 +125,7 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
                 <div className="space-y-2">
                   {categories.map((category) => (
-                    <label key={category.id} className="flex items-center space-x-3 cursor-pointer">
+                    <label key={category.id} className="flex items-center space-x-3 cursor-pointer group">
                       <input
                         type="radio"
                         name="category"
@@ -112,7 +134,9 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                         onChange={(e) => setSelectedCategory(e.target.value)}
                         className="w-4 h-4 text-amber-600 focus:ring-amber-500"
                       />
-                      <span className="text-gray-700">{category.name}</span>
+                      <span className="text-gray-700 group-hover:text-amber-600 transition-colors">
+                        {category.name}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -123,7 +147,7 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Price Range</h3>
                 <div className="space-y-2">
                   {priceRanges.map((range) => (
-                    <label key={range.value} className="flex items-center space-x-3 cursor-pointer">
+                    <label key={range.value} className="flex items-center space-x-3 cursor-pointer group">
                       <input
                         type="radio"
                         name="priceRange"
@@ -132,7 +156,9 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                         onChange={(e) => setPriceRange(e.target.value)}
                         className="w-4 h-4 text-amber-600 focus:ring-amber-500"
                       />
-                      <span className="text-gray-700">{range.label}</span>
+                      <span className="text-gray-700 group-hover:text-amber-600 transition-colors">
+                        {range.label}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -148,11 +174,14 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                       variant={selectedSizes.includes(size) ? "default" : "outline"}
                       size="sm"
                       onClick={() => handleSizeToggle(size)}
-                      className={`text-xs ${selectedSizes.includes(size) 
+                      className={`text-xs relative ${selectedSizes.includes(size) 
                         ? 'bg-amber-600 hover:bg-amber-700 text-white' 
                         : 'hover:bg-amber-50 hover:border-amber-300'
                       }`}
                     >
+                      {selectedSizes.includes(size) && (
+                        <Check className="h-3 w-3 absolute top-0 right-0 transform translate-x-1 -translate-y-1" />
+                      )}
                       {size}
                     </Button>
                   ))}
@@ -167,13 +196,17 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                     <button
                       key={colorItem.value}
                       onClick={() => handleColorToggle(colorItem.value)}
-                      className={`w-8 h-8 rounded-full border-2 transition-all ${
+                      className={`relative w-8 h-8 rounded-full border-2 transition-all ${
                         selectedColors.includes(colorItem.value)
-                          ? 'border-amber-500 ring-2 ring-amber-200' 
-                          : 'border-gray-300 hover:border-amber-400'
+                          ? 'border-amber-500 ring-2 ring-amber-200 scale-110' 
+                          : 'border-gray-300 hover:border-amber-400 hover:scale-105'
                       } ${colorItem.color}`}
                       title={colorItem.name}
-                    />
+                    >
+                      {selectedColors.includes(colorItem.value) && (
+                        <Check className="h-4 w-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white drop-shadow-lg" />
+                      )}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -185,6 +218,7 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                 variant="outline" 
                 onClick={handleClearFilters}
                 className="px-6 py-2"
+                disabled={!hasActiveFilters}
               >
                 Clear All Filters
               </Button>
@@ -197,10 +231,18 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({
                   Cancel
                 </Button>
                 <Button 
-                  onClick={onClose}
+                  onClick={handleApplyFilters}
+                  disabled={isApplying}
                   className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2"
                 >
-                  Apply Filters
+                  {isApplying ? (
+                    <>
+                      <Loader className="h-4 w-4 mr-2 animate-spin" />
+                      Applying...
+                    </>
+                  ) : (
+                    'Apply Filters'
+                  )}
                 </Button>
               </div>
             </div>

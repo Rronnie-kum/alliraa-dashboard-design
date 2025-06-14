@@ -1,8 +1,8 @@
+
 import React, { useState, useMemo } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
-import KurtiFilters from '@/components/KurtiFilters';
 import { Button } from '@/components/ui/button';
 import { Filter, Grid, List, Star, Heart, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';

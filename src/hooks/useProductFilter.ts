@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+
+import { useMemo, useState, useCallback } from 'react';
 import { Product } from '@/models/product';
 
 interface UseProductFilterProps {
@@ -23,6 +24,8 @@ interface UseProductFilterReturn {
   setDisplayedProducts: (count: number) => void;
   currentProducts: Product[];
   hasMoreProducts: boolean;
+  isLoading: boolean;
+  isLoadingMore: boolean;
   handleViewMore: () => void;
   clearAllFilters: () => void;
 }
@@ -38,9 +41,13 @@ const useProductFilter = ({
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [displayedProducts, setDisplayedProducts] = useState(12);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   
-  // Filter and sort products
+  // Filter and sort products with loading simulation
   const filteredAndSortedProducts = useMemo(() => {
+    setIsLoading(true);
+    
     let filtered = products;
 
     // Filter by category
@@ -99,6 +106,9 @@ const useProductFilter = ({
         break;
     }
 
+    // Simulate loading delay
+    setTimeout(() => setIsLoading(false), 300);
+    
     return filtered;
   }, [selectedCategory, priceRange, selectedColors, selectedSizes, sortBy, products]);
 
@@ -109,17 +119,21 @@ const useProductFilter = ({
 
   const hasMoreProducts = displayedProducts < filteredAndSortedProducts.length;
 
-  const handleViewMore = () => {
-    setDisplayedProducts(prev => Math.min(prev + 12, filteredAndSortedProducts.length));
-  };
+  const handleViewMore = useCallback(() => {
+    setIsLoadingMore(true);
+    setTimeout(() => {
+      setDisplayedProducts(prev => Math.min(prev + 12, filteredAndSortedProducts.length));
+      setIsLoadingMore(false);
+    }, 500);
+  }, [filteredAndSortedProducts.length]);
 
-  const clearAllFilters = () => {
+  const clearAllFilters = useCallback(() => {
     setSelectedCategory('all');
     setPriceRange('all');
     setSelectedColors([]);
     setSelectedSizes([]);
     setDisplayedProducts(12);
-  };
+  }, []);
 
   return {
     filteredAndSortedProducts,
@@ -137,6 +151,8 @@ const useProductFilter = ({
     setDisplayedProducts,
     currentProducts,
     hasMoreProducts,
+    isLoading,
+    isLoadingMore,
     handleViewMore,
     clearAllFilters
   };
