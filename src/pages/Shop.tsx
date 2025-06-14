@@ -27,6 +27,7 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [displayedProducts, setDisplayedProducts] = useState(12);
   const productsPerPage = 12;
 
   const allProducts = [
@@ -265,11 +266,13 @@ const Shop = () => {
     return filtered;
   }, [selectedCategory, priceRange, selectedColors, selectedSizes, sortBy]);
 
-  // Pagination
-  const totalPages = Math.ceil(filteredAndSortedProducts.length / productsPerPage);
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-  const currentProducts = filteredAndSortedProducts.slice(startIndex, endIndex);
+  // Display products based on displayedProducts count
+  const currentProducts = filteredAndSortedProducts.slice(0, displayedProducts);
+  const hasMoreProducts = displayedProducts < filteredAndSortedProducts.length;
+
+  const handleViewMore = () => {
+    setDisplayedProducts(prev => Math.min(prev + 12, filteredAndSortedProducts.length));
+  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -310,44 +313,6 @@ const Shop = () => {
                 View Lookbook
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Browse Collections
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover your perfect style from our diverse collections
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className={`group relative overflow-hidden rounded-2xl p-6 text-white cursor-pointer transform hover:scale-105 transition-all duration-300 ${category.color} ${selectedCategory === category.id ? 'ring-4 ring-white shadow-2xl' : ''}`}
-                onClick={() => {
-                  setSelectedCategory(category.id);
-                  setCurrentPage(1);
-                }}
-              >
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-                  <p className="text-white/90 mb-3">{category.count} items</p>
-                  <div className="inline-flex items-center text-sm font-medium">
-                    {selectedCategory === category.id ? 'Selected' : 'Explore Collection'}
-                    <svg className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -441,7 +406,7 @@ const Shop = () => {
                 {selectedCategory === 'all' ? 'All Collections' : `${categories.find(c => c.id === selectedCategory)?.name || 'Collections'}`}
               </h2>
               <p className="text-gray-600">
-                Showing {startIndex + 1}-{Math.min(endIndex, filteredAndSortedProducts.length)} of {filteredAndSortedProducts.length} items
+                Showing {currentProducts.length} of {filteredAndSortedProducts.length} items
               </p>
             </div>
             <div className="text-sm text-gray-500">
@@ -460,46 +425,15 @@ const Shop = () => {
             ))}
           </div>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="mt-16 flex justify-center">
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious 
-                      onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-                      className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-                    />
-                  </PaginationItem>
-                  
-                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                    const page = i + 1;
-                    if (totalPages <= 5) {
-                      return (
-                        <PaginationItem key={page}>
-                          <PaginationLink
-                            onClick={() => handlePageChange(page)}
-                            isActive={currentPage === page}
-                            className="cursor-pointer"
-                          >
-                            {page}
-                          </PaginationLink>
-                        </PaginationItem>
-                      );
-                    }
-                    return null;
-                  })}
-                  
-                  {totalPages > 5 && <PaginationEllipsis />}
-                  
-                  <PaginationItem>
-                    <PaginationNext 
-                      onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
-                      className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
+          {/* View More Products Button */}
+          {hasMoreProducts && (
+            <div className="mt-12 text-center">
+              <Button 
+                onClick={handleViewMore}
+                className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-3 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+              >
+                View More Products
+              </Button>
             </div>
           )}
 
@@ -513,6 +447,7 @@ const Shop = () => {
                   setSelectedColors([]);
                   setSelectedSizes([]);
                   setCurrentPage(1);
+                  setDisplayedProducts(12);
                 }}
                 className="mt-4 bg-amber-600 hover:bg-amber-700 text-white"
               >
