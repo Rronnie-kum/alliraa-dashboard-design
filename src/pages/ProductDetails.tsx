@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -9,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 // Sample product data - in real app this would come from API
 const productData = {
@@ -58,15 +58,16 @@ const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [isWishlisted, setIsWishlisted] = useState(false);
 
   // Get product data (fallback to default if ID not found)
   const product = productData[id as keyof typeof productData] || productData['1'];
+  const isWishlisted = isInWishlist(product.id);
 
   const relatedProducts = [
     {
@@ -116,11 +117,29 @@ const ProductDetails = () => {
   };
 
   const handleAddToWishlist = () => {
-    setIsWishlisted(!isWishlisted);
-    toast({
-      title: isWishlisted ? "Removed from Wishlist" : "Added to Wishlist",
-      description: `${product.name} has been ${isWishlisted ? 'removed from' : 'added to'} your wishlist`
-    });
+    const wishlistProduct = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      image: product.images[0],
+      badge: product.category,
+      rating: product.rating
+    };
+
+    if (isWishlisted) {
+      removeFromWishlist(product.id);
+      toast({
+        title: "Removed from Wishlist",
+        description: `${product.name} has been removed from your wishlist`
+      });
+    } else {
+      addToWishlist(wishlistProduct);
+      toast({
+        title: "Added to Wishlist",
+        description: `${product.name} has been added to your wishlist`
+      });
+    }
   };
 
   const handleBuyNow = () => {

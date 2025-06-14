@@ -6,9 +6,11 @@ import Logo from './Logo';
 import SearchBar from './SearchBar';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { wishlistCount } = useWishlist();
 
   const handleSearch = (query: string) => {
     console.log('Search query:', query);
@@ -58,8 +60,13 @@ const Header = () => {
                 </Button>
               </Link>
               <Link to="/liked-products">
-                <Button variant="ghost" size="sm" className="hover:bg-amber-50 hover:text-amber-800">
+                <Button variant="ghost" size="sm" className="relative hover:bg-amber-50 hover:text-amber-800">
                   <Heart className="h-5 w-5" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {wishlistCount}
+                    </span>
+                  )}
                 </Button>
               </Link>
               <Link to="/cart">

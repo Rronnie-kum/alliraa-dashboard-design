@@ -4,45 +4,30 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
-import { Heart, ArrowLeft, ShoppingBag, Filter, Grid, List } from 'lucide-react';
+import { Heart, ArrowLeft, ShoppingBag, Filter, Grid, List, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useWishlist } from '@/contexts/WishlistContext';
+import { useToast } from '@/hooks/use-toast';
 
 const LikedProducts = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const { wishlistItems, removeFromWishlist } = useWishlist();
+  const { toast } = useToast();
 
-  // Sample liked products data
-  const likedProducts = [
-    {
-      id: '1',
-      name: 'Traditional Embroidered Kurti',
-      price: 75,
-      originalPrice: 95,
-      image: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=400&fit=crop',
-      badge: 'Bestseller',
-      rating: 4.8,
-      reviews: 124
-    },
-    {
-      id: '3',
-      name: 'Designer Silk Kurti',
-      price: 125,
-      originalPrice: 150,
-      image: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=400&fit=crop',
-      badge: 'Premium',
-      rating: 4.9,
-      reviews: 156
-    },
-    {
-      id: '5',
-      name: 'Festive Occasion Kurti',
-      price: 95,
-      originalPrice: 120,
-      image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=400&fit=crop',
-      badge: 'Special',
-      rating: 4.7,
-      reviews: 203
-    }
-  ];
+  const handleClearAll = () => {
+    wishlistItems.forEach(product => removeFromWishlist(product.id));
+    toast({
+      title: "Wishlist Cleared",
+      description: "All items have been removed from your wishlist"
+    });
+  };
+
+  const handleAddAllToCart = () => {
+    toast({
+      title: "Added to Cart",
+      description: `${wishlistItems.length} items added to cart`
+    });
+  };
 
   return (
     <div className="min-h-screen bg-amber-50">
@@ -82,18 +67,18 @@ const LikedProducts = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6 bg-amber-50 rounded-lg border border-amber-200">
-              <div className="text-3xl font-bold text-amber-700 mb-2">{likedProducts.length}</div>
+              <div className="text-3xl font-bold text-amber-700 mb-2">{wishlistItems.length}</div>
               <div className="text-amber-600 font-medium">Liked Items</div>
             </div>
             <div className="text-center p-6 bg-green-50 rounded-lg border border-green-200">
               <div className="text-3xl font-bold text-green-700 mb-2">
-                ${likedProducts.reduce((total, product) => total + (product.originalPrice || product.price), 0)}
+                ${wishlistItems.reduce((total, product) => total + (product.originalPrice || product.price), 0)}
               </div>
               <div className="text-green-600 font-medium">Total Value</div>
             </div>
             <div className="text-center p-6 bg-orange-50 rounded-lg border border-orange-200">
               <div className="text-3xl font-bold text-orange-700 mb-2">
-                ${likedProducts.reduce((total, product) => total + (product.originalPrice || product.price) - product.price, 0)}
+                ${wishlistItems.reduce((total, product) => total + (product.originalPrice ? product.originalPrice - product.price : 0), 0)}
               </div>
               <div className="text-orange-600 font-medium">Potential Savings</div>
             </div>
@@ -110,10 +95,25 @@ const LikedProducts = () => {
                 <Filter className="h-4 w-4" />
                 Filter by Category
               </Button>
-              <Button className="bg-amber-800 hover:bg-amber-900 text-white shadow-md">
-                <ShoppingBag className="h-4 w-4 mr-2" />
-                Add All to Cart
-              </Button>
+              {wishlistItems.length > 0 && (
+                <>
+                  <Button 
+                    onClick={handleAddAllToCart}
+                    className="bg-amber-800 hover:bg-amber-900 text-white shadow-md"
+                  >
+                    <ShoppingBag className="h-4 w-4 mr-2" />
+                    Add All to Cart
+                  </Button>
+                  <Button 
+                    onClick={handleClearAll}
+                    variant="destructive"
+                    className="shadow-md"
+                  >
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Clear All
+                  </Button>
+                </>
+              )}
             </div>
             <div className="flex items-center gap-2">
               <span className="text-sm text-amber-700 mr-3 font-medium">View:</span>
@@ -141,11 +141,11 @@ const LikedProducts = () => {
       {/* Products Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {likedProducts.length > 0 ? (
+          {wishlistItems.length > 0 ? (
             <>
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-amber-900 mb-2">
-                  Your Liked Products ({likedProducts.length})
+                  Your Liked Products ({wishlistItems.length})
                 </h2>
                 <p className="text-amber-700">
                   Items you've marked as favorites
@@ -156,17 +156,8 @@ const LikedProducts = () => {
                 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
                 : 'grid-cols-1 lg:grid-cols-2'
               }`}>
-                {likedProducts.map((product) => (
+                {wishlistItems.map((product) => (
                   <div key={product.id} className="group relative">
-                    <div className="absolute top-2 right-2 z-10">
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="bg-white/90 hover:bg-white shadow-md border border-amber-200"
-                      >
-                        <Heart className="h-4 w-4 text-amber-600 fill-amber-600" />
-                      </Button>
-                    </div>
                     <ProductCard {...product} />
                   </div>
                 ))}
