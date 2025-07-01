@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { User, Mail, Phone, MapPin, Calendar, Settings, LogOut, Edit } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Calendar, Settings, LogOut, Edit, Package, Star, CreditCard, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -24,20 +24,31 @@ const UserProfile = () => {
     avatar: "", // Empty for fallback
     membershipLevel: "Premium Member",
     totalOrders: 24,
-    loyaltyPoints: 1250
+    loyaltyPoints: 1250,
+    favoriteCategory: "Ethnic Wear",
+    lastOrderDate: "December 15, 2024",
+    shippingAddress: "123 Fashion Street, NY 10001",
+    paymentMethod: "Visa ending in 4532"
   };
 
-  const keyPoints = [
-    { icon: Mail, label: "Email", value: userData.email },
-    { icon: Phone, label: "Phone", value: userData.phone },
+  const profileDetails = [
+    { icon: User, label: "Full Name", value: userData.name },
+    { icon: Mail, label: "Email Address", value: userData.email },
+    { icon: Phone, label: "Phone Number", value: userData.phone },
     { icon: MapPin, label: "Location", value: userData.location },
-    { icon: Calendar, label: "Member Since", value: userData.joinedDate }
+    { icon: Calendar, label: "Member Since", value: userData.joinedDate },
+    { icon: Package, label: "Total Orders", value: `${userData.totalOrders} orders` },
+    { icon: Star, label: "Loyalty Points", value: `${userData.loyaltyPoints} points` },
+    { icon: Shield, label: "Membership Level", value: userData.membershipLevel },
+    { icon: Calendar, label: "Last Order", value: userData.lastOrderDate },
+    { icon: MapPin, label: "Shipping Address", value: userData.shippingAddress },
+    { icon: CreditCard, label: "Payment Method", value: userData.paymentMethod }
   ];
 
-  const stats = [
-    { label: "Total Orders", value: userData.totalOrders },
-    { label: "Loyalty Points", value: userData.loyaltyPoints },
-    { label: "Status", value: userData.membershipLevel }
+  const quickStats = [
+    { label: "Orders", value: userData.totalOrders, color: "text-blue-600" },
+    { label: "Points", value: userData.loyaltyPoints, color: "text-amber-600" },
+    { label: "Reviews", value: "12", color: "text-green-600" }
   ];
 
   return (
@@ -47,17 +58,18 @@ const UserProfile = () => {
           <User className="h-5 w-5" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-center text-xl font-bold text-gray-900">
+      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto data-[state=open]:slide-in-from-right-1/2 data-[state=closed]:slide-out-to-right-1/2">
+        <DialogHeader className="pb-4 border-b border-gray-100">
+          <DialogTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <User className="h-5 w-5 text-amber-600" />
             User Profile
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Profile Header */}
-          <div className="text-center">
-            <Avatar className="h-20 w-20 mx-auto mb-4">
+          <div className="text-center py-4">
+            <Avatar className="h-20 w-20 mx-auto mb-3">
               <AvatarImage src={userData.avatar} alt={userData.name} />
               <AvatarFallback className="bg-amber-100 text-amber-800 text-lg font-semibold">
                 {userData.name.split(' ').map(n => n[0]).join('')}
@@ -67,45 +79,47 @@ const UserProfile = () => {
             <p className="text-sm text-amber-600 font-medium">{userData.membershipLevel}</p>
           </div>
 
-          {/* Key Information */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-              Contact Information
-            </h4>
-            {keyPoints.map((point, index) => (
-              <div key={index} className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50">
-                <point.icon className="h-4 w-4 text-amber-600" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">{point.label}</p>
-                  <p className="text-sm text-gray-900 truncate">{point.value}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-200">
-            {stats.map((stat, index) => (
+          {/* Quick Stats */}
+          <div className="grid grid-cols-3 gap-3 py-3 bg-gray-50 rounded-lg">
+            {quickStats.map((stat, index) => (
               <div key={index} className="text-center">
-                <p className="text-lg font-bold text-amber-600">{stat.value}</p>
+                <p className={`text-lg font-bold ${stat.color}`}>{stat.value}</p>
                 <p className="text-xs text-gray-500">{stat.label}</p>
               </div>
             ))}
           </div>
 
+          {/* Detailed Information List */}
+          <div className="space-y-1">
+            <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">
+              Profile Details
+            </h4>
+            {profileDetails.map((detail, index) => (
+              <div key={index} className="flex items-start space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <detail.icon className="h-4 w-4 text-amber-600 mt-0.5 flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">{detail.label}</p>
+                  <p className="text-sm text-gray-900 break-words">{detail.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Action Buttons */}
-          <div className="flex space-x-2 pt-4">
-            <Button variant="outline" size="sm" className="flex-1">
+          <div className="flex flex-col space-y-2 pt-4 border-t border-gray-100">
+            <Button variant="default" size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
               <Edit className="h-4 w-4 mr-2" />
               Edit Profile
             </Button>
-            <Button variant="outline" size="sm" className="flex-1">
-              <Settings className="h-4 w-4 mr-2" />
-              Settings
-            </Button>
-            <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-              <LogOut className="h-4 w-4" />
-            </Button>
+            <div className="flex space-x-2">
+              <Button variant="outline" size="sm" className="flex-1">
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
+              </Button>
+              <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
       </DialogContent>
