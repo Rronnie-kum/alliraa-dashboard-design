@@ -24,7 +24,7 @@ const UserProfile = () => {
     avatar: "", // Empty for fallback
     membershipLevel: "Premium Member",
     totalOrders: 24,
-    loyaltyPoints: 1,250
+    loyaltyPoints: 1250
   };
 
   const keyPoints = [
