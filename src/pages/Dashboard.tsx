@@ -2,12 +2,45 @@
 import React from 'react';
 import Sidebar from '@/components/Sidebar';
 import DashboardHeader from '@/components/DashboardHeader';
-import StatCard from '@/components/StatCard';
-import { Users, ShoppingBag, DollarSign, TrendingUp, Activity } from 'lucide-react';
+import DashboardMetrics from '@/components/DashboardMetrics';
+import RecentOrders from '@/components/RecentOrders';
+import TopCategories from '@/components/TopCategories';
+import QuickActions from '@/components/QuickActions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
+import { 
+  Calendar,
+  Download,
+  Filter,
+  RefreshCw,
+  Bell,
+  AlertCircle,
+  CheckCircle,
+  Clock
+} from 'lucide-react';
 
 const Dashboard = () => {
+  const alerts = [
+    {
+      type: 'warning',
+      message: '8 products are running low on stock',
+      icon: AlertCircle,
+      color: 'text-yellow-600 bg-yellow-50'
+    },
+    {
+      type: 'success',
+      message: 'Monthly sales target achieved!',
+      icon: CheckCircle,
+      color: 'text-green-600 bg-green-50'
+    },
+    {
+      type: 'info',
+      message: '15 orders pending approval',
+      icon: Clock,
+      color: 'text-blue-600 bg-blue-50'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Sidebar activeItem="Dashboard" />
@@ -15,145 +48,157 @@ const Dashboard = () => {
       <div className="ml-64">
         <DashboardHeader />
         
-        <main className="p-6">
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <StatCard
-              title="Total Users"
-              value="24,532"
-              change="+12% from last month"
-              icon={Users}
-              trend="up"
-            />
-            <StatCard
-              title="Total Orders"
-              value="1,429"
-              change="+8% from last month"
-              icon={ShoppingBag}
-              trend="up"
-            />
-            <StatCard
-              title="Revenue"
-              value="$89,432"
-              change="+23% from last month"
-              icon={DollarSign}
-              trend="up"
-            />
-            <StatCard
-              title="Growth Rate"
-              value="12.5%"
-              change="-2% from last month"
-              icon={TrendingUp}
-              trend="down"
-            />
+        <main className="p-6 space-y-6">
+          {/* Page Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+              <p className="text-gray-600">Welcome back! Here's what's happening with ALLIRAA today.</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Button variant="outline" size="sm">
+                <Calendar className="h-4 w-4 mr-2" />
+                Last 30 days
+              </Button>
+              <Button variant="outline" size="sm">
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
+              <Button variant="outline" size="sm">
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Refresh
+              </Button>
+            </div>
           </div>
 
+          {/* Alert Bar */}
+          <div className="space-y-2">
+            {alerts.map((alert, index) => (
+              <div key={index} className={`flex items-center gap-3 p-3 rounded-lg border ${alert.color}`}>
+                <alert.icon className="h-5 w-5" />
+                <span className="text-sm font-medium">{alert.message}</span>
+                <Button variant="ghost" size="sm" className="ml-auto">
+                  <Bell className="h-4 w-4" />
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          {/* Metrics Grid */}
+          <DashboardMetrics />
+
+          {/* Main Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Sales Overview */}
-            <Card className="lg:col-span-2">
-              <CardHeader>
-                <CardTitle>Sales Overview</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-64 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">Sales Chart Placeholder</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Recent Activity */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Activity</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {[
-                  { user: 'John Doe', action: 'placed an order', time: '2 mins ago' },
-                  { user: 'Jane Smith', action: 'updated profile', time: '5 mins ago' },
-                  { user: 'Mike Johnson', action: 'left a review', time: '10 mins ago' },
-                  { user: 'Sarah Wilson', action: 'signed up', time: '15 mins ago' },
-                ].map((activity, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
-                      <Activity className="h-4 w-4 text-amber-800" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">{activity.user}</p>
-                      <p className="text-xs text-gray-500">{activity.action}</p>
-                    </div>
-                    <span className="text-xs text-gray-400">{activity.time}</span>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+            {/* Recent Orders - Takes 2 columns */}
+            <div className="lg:col-span-2">
+              <RecentOrders />
+            </div>
+            
+            {/* Top Categories - Takes 1 column */}
+            <div>
+              <TopCategories />
+            </div>
           </div>
 
-          {/* Performance Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          {/* Sales Chart */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Sales Analytics</CardTitle>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm">
+                  <Filter className="h-4 w-4 mr-2" />
+                  Filter
+                </Button>
+                <Button variant="outline" size="sm">
+                  View Details
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="h-80 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg flex items-center justify-center border border-amber-100">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">📊</div>
+                  <p className="text-gray-600 font-medium">Sales Chart</p>
+                  <p className="text-sm text-gray-500">Interactive analytics would be displayed here</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Quick Actions */}
+          <QuickActions />
+
+          {/* Performance Summary */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>Goal Completion</CardTitle>
+                <CardTitle className="text-lg">Today's Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Monthly Sales</span>
-                    <span>75%</span>
-                  </div>
-                  <Progress value={75} className="h-2" />
+              <CardContent className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">New Orders</span>
+                  <span className="font-semibold">12</span>
                 </div>
-                <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Customer Growth</span>
-                    <span>60%</span>
-                  </div>
-                  <Progress value={60} className="h-2" />
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Revenue</span>
+                  <span className="font-semibold">₹8,450</span>
                 </div>
-                <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Revenue Target</span>
-                    <span>85%</span>
-                  </div>
-                  <Progress value={85} className="h-2" />
+                <div className="flex justify-between">
+                  <span className="text-gray-600">New Customers</span>
+                  <span className="font-semibold">5</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Returns</span>
+                  <span className="font-semibold">2</span>
                 </div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Top Products</CardTitle>
+                <CardTitle className="text-lg">Inventory Status</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {[
-                  { name: 'Yoga Leggings', sales: '2,430' },
-                  { name: 'Sports Bra', sales: '1,820' },
-                  { name: 'Running Shorts', sales: '1,290' },
-                ].map((product, index) => (
-                  <div key={index} className="flex justify-between items-center">
-                    <span className="text-sm font-medium">{product.name}</span>
-                    <span className="text-sm text-gray-500">{product.sales} sold</span>
-                  </div>
-                ))}
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Total Products</span>
+                  <span className="font-semibold">156</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">In Stock</span>
+                  <span className="font-semibold text-green-600">148</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Low Stock</span>
+                  <span className="font-semibold text-yellow-600">8</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Out of Stock</span>
+                  <span className="font-semibold text-red-600">0</span>
+                </div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
+                <CardTitle className="text-lg">Customer Insights</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <button className="w-full p-3 text-left bg-amber-50 hover:bg-amber-100 rounded-lg transition-colors">
-                  <p className="font-medium text-amber-800">Add New Product</p>
-                  <p className="text-sm text-amber-600">Create a new product listing</p>
-                </button>
-                <button className="w-full p-3 text-left bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
-                  <p className="font-medium text-blue-800">View Reports</p>
-                  <p className="text-sm text-blue-600">Generate detailed analytics</p>
-                </button>
-                <button className="w-full p-3 text-left bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
-                  <p className="font-medium text-green-800">Manage Orders</p>
-                  <p className="text-sm text-green-600">Process pending orders</p>
-                </button>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Total Customers</span>
+                  <span className="font-semibold">2,847</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Active This Month</span>
+                  <span className="font-semibold">1,234</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Avg. Order Value</span>
+                  <span className="font-semibold">₹1,850</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Repeat Customers</span>
+                  <span className="font-semibold">68%</span>
+                </div>
               </CardContent>
             </Card>
           </div>
