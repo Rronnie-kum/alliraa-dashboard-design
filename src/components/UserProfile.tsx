@@ -12,11 +12,14 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import EditProfile from './EditProfile';
 import SettingsComponent from './Settings';
+import LoginModal from './LoginModal';
 
 const UserProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   // Mock user data - in a real app, this would come from authentication context
   const [userData, setUserData] = useState({
@@ -70,8 +73,14 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     console.log('User logged out');
-    // In a real app, this would handle logout logic
+    setIsLoggedIn(false);
     setIsOpen(false);
+    setIsLoginOpen(true);
+  };
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    console.log('User logged in successfully');
   };
 
   return (
@@ -176,6 +185,13 @@ const UserProfile = () => {
       <SettingsComponent
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
+      />
+
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
       />
     </>
   );
