@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 import { Eye, Edit, Trash2, MoreVertical } from 'lucide-react';
 import {
   DropdownMenu,
@@ -20,6 +21,41 @@ interface Order {
 }
 
 const RecentOrders = () => {
+  const { toast } = useToast();
+  
+  const handleOrderAction = (action: string, orderId: string) => {
+    switch (action) {
+      case 'view':
+        toast({
+          title: "Order Details",
+          description: `Viewing details for order ${orderId}`,
+        });
+        break;
+      case 'edit':
+        toast({
+          title: "Edit Order",
+          description: `Opening edit form for order ${orderId}`,
+        });
+        break;
+      case 'cancel':
+        toast({
+          title: "Order Cancelled",
+          description: `Order ${orderId} has been cancelled`,
+          variant: "destructive",
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleViewAll = () => {
+    toast({
+      title: "All Orders",
+      description: "Loading complete order management system...",
+    });
+  };
+
   const orders: Order[] = [
     {
       id: "#ORD-2024-001",
@@ -84,7 +120,7 @@ const RecentOrders = () => {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>Recent Orders</CardTitle>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" onClick={handleViewAll}>
           View All
         </Button>
       </CardHeader>
@@ -113,15 +149,18 @@ const RecentOrders = () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleOrderAction('view', order.id)}>
                       <Eye className="h-4 w-4 mr-2" />
                       View Details
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleOrderAction('edit', order.id)}>
                       <Edit className="h-4 w-4 mr-2" />
                       Edit Order
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="text-red-600">
+                    <DropdownMenuItem 
+                      className="text-red-600"
+                      onClick={() => handleOrderAction('cancel', order.id)}
+                    >
                       <Trash2 className="h-4 w-4 mr-2" />
                       Cancel Order
                     </DropdownMenuItem>

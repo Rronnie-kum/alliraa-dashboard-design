@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '@/components/Sidebar';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardMetrics from '@/components/DashboardMetrics';
@@ -8,6 +8,7 @@ import TopCategories from '@/components/TopCategories';
 import QuickActions from '@/components/QuickActions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Calendar,
   Download,
@@ -16,30 +17,72 @@ import {
   Bell,
   AlertCircle,
   CheckCircle,
-  Clock
+  Clock,
+  X
 } from 'lucide-react';
 
 const Dashboard = () => {
-  const alerts = [
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [alerts, setAlerts] = useState([
     {
+      id: 1,
       type: 'warning',
       message: '8 products are running low on stock',
       icon: AlertCircle,
-      color: 'text-yellow-600 bg-yellow-50'
+      color: 'text-yellow-600 bg-yellow-50 border-yellow-200'
     },
     {
+      id: 2,
       type: 'success',
       message: 'Monthly sales target achieved!',
       icon: CheckCircle,
-      color: 'text-green-600 bg-green-50'
+      color: 'text-green-600 bg-green-50 border-green-200'
     },
     {
+      id: 3,
       type: 'info',
       message: '15 orders pending approval',
       icon: Clock,
-      color: 'text-blue-600 bg-blue-50'
+      color: 'text-blue-600 bg-blue-50 border-blue-200'
     }
-  ];
+  ]);
+
+  const handleExport = () => {
+    toast({
+      title: "Exporting Data",
+      description: "Your dashboard report is being generated...",
+    });
+  };
+
+  const handleRefresh = () => {
+    toast({
+      title: "Dashboard Refreshed",
+      description: "All data has been updated successfully.",
+    });
+  };
+
+  const handleDateFilter = () => {
+    toast({
+      title: "Date Filter",
+      description: "Opening date range selector...",
+    });
+  };
+
+  const handleFilterChange = () => {
+    toast({
+      title: "Filters Applied",
+      description: "Dashboard data filtered successfully.",
+    });
+  };
+
+  const dismissAlert = (alertId: number) => {
+    setAlerts(alerts.filter(alert => alert.id !== alertId));
+    toast({
+      title: "Alert Dismissed",
+      description: "Alert has been removed from your dashboard.",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -56,15 +99,15 @@ const Dashboard = () => {
               <p className="text-gray-600">Welcome back! Here's what's happening with ALLIRAA today.</p>
             </div>
             <div className="flex items-center gap-3">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={handleDateFilter}>
                 <Calendar className="h-4 w-4 mr-2" />
                 Last 30 days
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={handleExport}>
                 <Download className="h-4 w-4 mr-2" />
                 Export
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={handleRefresh}>
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Refresh
               </Button>
@@ -73,12 +116,17 @@ const Dashboard = () => {
 
           {/* Alert Bar */}
           <div className="space-y-2">
-            {alerts.map((alert, index) => (
-              <div key={index} className={`flex items-center gap-3 p-3 rounded-lg border ${alert.color}`}>
+            {alerts.map((alert) => (
+              <div key={alert.id} className={`flex items-center gap-3 p-3 rounded-lg border ${alert.color}`}>
                 <alert.icon className="h-5 w-5" />
-                <span className="text-sm font-medium">{alert.message}</span>
-                <Button variant="ghost" size="sm" className="ml-auto">
-                  <Bell className="h-4 w-4" />
+                <span className="text-sm font-medium flex-1">{alert.message}</span>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => dismissAlert(alert.id)}
+                  className="hover:bg-transparent"
+                >
+                  <X className="h-4 w-4" />
                 </Button>
               </div>
             ))}
@@ -105,11 +153,11 @@ const Dashboard = () => {
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Sales Analytics</CardTitle>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={handleFilterChange}>
                   <Filter className="h-4 w-4 mr-2" />
                   Filter
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => navigate('/analytics')}>
                   View Details
                 </Button>
               </div>
