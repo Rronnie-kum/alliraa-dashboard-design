@@ -50,6 +50,7 @@ const Header = () => {
               <Link to="/product" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">PRODUCT</Link>
               <Link to="/kurti" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">KURTI</Link>
               <Link to="/about" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">ABOUT</Link>
+              <Link to="/dashboard" className="text-gray-900 hover:text-amber-800 font-medium transition-colors">DASHBOARD</Link>
             </nav>
 
             {/* Right side icons */}
