@@ -23,51 +23,28 @@ const QuickActions = () => {
   const handleAction = (actionType: string) => {
     switch (actionType) {
       case 'add-product':
-        toast({
-          title: "Add New Product",
-          description: "Redirecting to product creation form...",
-        });
-        // In a real app, this would navigate to product creation page
+        navigate('/add-product');
         break;
       case 'manage-products':
         navigate('/products');
-        toast({
-          title: "Product Management",
-          description: "Opening product management...",
-        });
         break;
       case 'process-orders':
-        toast({
-          title: "Order Processing",
-          description: "Opening order management system...",
-        });
+        navigate('/orders');
         break;
       case 'view-analytics':
         navigate('/analytics');
         break;
       case 'manage-customers':
-        toast({
-          title: "Customer Management",
-          description: "Opening customer database...",
-        });
+        navigate('/customers');
         break;
       case 'create-promotion':
-        toast({
-          title: "Create Promotion",
-          description: "Opening promotion setup...",
-        });
+        navigate('/promotions');
         break;
       case 'shipping-settings':
-        toast({
-          title: "Shipping Settings",
-          description: "Opening shipping configuration...",
-        });
+        navigate('/shipping');
         break;
       case 'generate-report':
-        toast({
-          title: "Report Generated",
-          description: "Your business report is being prepared...",
-        });
+        navigate('/reports');
         break;
       default:
         break;

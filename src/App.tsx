@@ -20,6 +20,12 @@ import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
 import Analytics from "./pages/Analytics";
 import ProductList from "./pages/ProductList";
+import AddProduct from "./pages/AddProduct";
+import OrderManagement from "./pages/OrderManagement";
+import CustomerManagement from "./pages/CustomerManagement";
+import PromotionManager from "./pages/PromotionManager";
+import ShippingSettings from "./pages/ShippingSettings";
+import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 import SummerEssentials from "./pages/SummerEssentials";
 import CasualComfort from "./pages/CasualComfort";
@@ -52,6 +58,12 @@ const App: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/products" element={<ProductList />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/orders" element={<OrderManagement />} />
+              <Route path="/customers" element={<CustomerManagement />} />
+              <Route path="/promotions" element={<PromotionManager />} />
+              <Route path="/shipping" element={<ShippingSettings />} />
+              <Route path="/reports" element={<Reports />} />
               <Route path="/tasks" element={<Tasks />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/summer-essentials" element={<SummerEssentials />} />
