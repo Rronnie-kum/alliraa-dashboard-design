@@ -19,6 +19,7 @@ import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
 import Analytics from "./pages/Analytics";
+import ProductList from "./pages/ProductList";
 import NotFound from "./pages/NotFound";
 import SummerEssentials from "./pages/SummerEssentials";
 import CasualComfort from "./pages/CasualComfort";
@@ -50,6 +51,7 @@ const App: React.FC = () => {
               <Route path="/liked-products" element={<LikedProducts />} />
               <Route path="/about" element={<About />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/products" element={<ProductList />} />
               <Route path="/tasks" element={<Tasks />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/summer-essentials" element={<SummerEssentials />} />

@@ -29,11 +29,11 @@ const QuickActions = () => {
         });
         // In a real app, this would navigate to product creation page
         break;
-      case 'manage-inventory':
-        navigate('/shop');
+      case 'manage-products':
+        navigate('/products');
         toast({
-          title: "Inventory Management",
-          description: "Opening inventory management...",
+          title: "Product Management",
+          description: "Opening product management...",
         });
         break;
       case 'process-orders':
@@ -84,12 +84,12 @@ const QuickActions = () => {
       action: "add-product"
     },
     {
-      title: "Manage Inventory",
-      description: "Update stock and pricing",
+      title: "Manage Products",
+      description: "View & edit all products",
       icon: Package,
       color: "bg-blue-50 hover:bg-blue-100 border-blue-200",
       iconColor: "text-blue-600",
-      action: "manage-inventory"
+      action: "manage-products"
     },
     {
       title: "Process Orders",
