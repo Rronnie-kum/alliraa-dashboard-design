@@ -6,6 +6,8 @@ import DashboardMetrics from '@/components/DashboardMetrics';
 import RecentOrders from '@/components/RecentOrders';
 import TopCategories from '@/components/TopCategories';
 import QuickActions from '@/components/QuickActions';
+import ActivityFeed from '@/components/ActivityFeed';
+import PerformanceCharts from '@/components/PerformanceCharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
@@ -148,107 +150,69 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Sales Chart */}
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Sales Analytics</CardTitle>
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" onClick={handleFilterChange}>
-                  <Filter className="h-4 w-4 mr-2" />
-                  Filter
-                </Button>
-                <Button variant="outline" size="sm" onClick={() => navigate('/analytics')}>
-                  View Details
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="h-80 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg flex items-center justify-center border border-amber-100">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">📊</div>
-                  <p className="text-gray-600 font-medium">Sales Chart</p>
-                  <p className="text-sm text-gray-500">Interactive analytics would be displayed here</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Performance Charts */}
+          <PerformanceCharts />
 
           {/* Quick Actions */}
           <QuickActions />
 
-          {/* Performance Summary */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Today's Summary</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">New Orders</span>
-                  <span className="font-semibold">12</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Revenue</span>
-                  <span className="font-semibold">₹8,450</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">New Customers</span>
-                  <span className="font-semibold">5</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Returns</span>
-                  <span className="font-semibold">2</span>
-                </div>
-              </CardContent>
-            </Card>
+          {/* Activity Feed and Performance Summary */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Activity Feed - Takes 2 columns */}
+            <div className="lg:col-span-2">
+              <ActivityFeed />
+            </div>
+            
+            {/* Performance Summary - Takes 1 column */}
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Today's Summary</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">New Orders</span>
+                    <span className="font-semibold">12</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Revenue</span>
+                    <span className="font-semibold">₹8,450</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">New Customers</span>
+                    <span className="font-semibold">5</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Returns</span>
+                    <span className="font-semibold">2</span>
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Inventory Status</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Total Products</span>
-                  <span className="font-semibold">156</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">In Stock</span>
-                  <span className="font-semibold text-green-600">148</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Low Stock</span>
-                  <span className="font-semibold text-yellow-600">8</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Out of Stock</span>
-                  <span className="font-semibold text-red-600">0</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Customer Insights</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Total Customers</span>
-                  <span className="font-semibold">2,847</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Active This Month</span>
-                  <span className="font-semibold">1,234</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Avg. Order Value</span>
-                  <span className="font-semibold">₹1,850</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Repeat Customers</span>
-                  <span className="font-semibold">68%</span>
-                </div>
-              </CardContent>
-            </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Inventory Status</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Products</span>
+                    <span className="font-semibold">156</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">In Stock</span>
+                    <span className="font-semibold text-green-600">148</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Low Stock</span>
+                    <span className="font-semibold text-yellow-600">8</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Out of Stock</span>
+                    <span className="font-semibold text-red-600">0</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </main>
       </div>

@@ -1,31 +1,53 @@
-
 import React from 'react';
-import { LucideIcon } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 interface StatCardProps {
   title: string;
-  value: string;
-  change: string;
-  icon: LucideIcon;
-  trend: 'up' | 'down';
+  value: string | number;
+  subtitle?: string;
+  icon: React.ElementType;
+  color: string;
+  trend?: {
+    value: string;
+    direction: 'up' | 'down';
+  };
+  onClick?: () => void;
 }
 
-const StatCard: React.FC<StatCardProps> = ({ title, value, change, icon: Icon, trend }) => {
+const StatCard = ({ title, value, subtitle, icon: Icon, color, trend, onClick }: StatCardProps) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-gray-600 mb-1">{title}</p>
-          <p className="text-3xl font-bold text-gray-900">{value}</p>
-          <p className={`text-sm mt-1 ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
-            {change}
-          </p>
+    <Card 
+      className={`hover:shadow-lg transition-all duration-200 cursor-pointer ${onClick ? 'hover:scale-105' : ''}`}
+      onClick={onClick}
+    >
+      <CardContent className="p-6">
+        <div className="flex items-center justify-between">
+          <div className="flex-1">
+            <p className="text-sm font-medium text-muted-foreground mb-1">{title}</p>
+            <p className="text-3xl font-bold text-foreground">{value}</p>
+            {subtitle && (
+              <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
+            )}
+            {trend && (
+              <div className={`flex items-center mt-2 text-xs ${
+                trend.direction === 'up' ? 'text-green-600' : 'text-red-600'
+              }`}>
+                {trend.direction === 'up' ? (
+                  <TrendingUp className="h-3 w-3 mr-1" />
+                ) : (
+                  <TrendingDown className="h-3 w-3 mr-1" />
+                )}
+                {trend.value}
+              </div>
+            )}
+          </div>
+          <div className={`p-3 rounded-full ${color}`}>
+            <Icon className="h-6 w-6 text-white" />
+          </div>
         </div>
-        <div className="p-3 bg-amber-50 rounded-lg">
-          <Icon className="h-6 w-6 text-amber-800" />
-        </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
