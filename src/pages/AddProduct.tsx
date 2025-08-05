@@ -329,7 +329,7 @@ const AddProduct: React.FC = () => {
                       <SelectValue placeholder="Select badge" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">No Badge</SelectItem>
+                      <SelectItem value="none">No Badge</SelectItem>
                       <SelectItem value="Bestseller">Bestseller</SelectItem>
                       <SelectItem value="New">New</SelectItem>
                       <SelectItem value="Sale">Sale</SelectItem>
