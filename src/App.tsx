@@ -35,6 +35,7 @@ import BohoChic from "./pages/BohoChic";
 import HealthyLifestyle from "./pages/HealthyLifestyle";
 import NewArrivals from "./pages/NewArrivals";
 import PouchBag from "./pages/PouchBag";
+import MyOrders from "./pages/MyOrders";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,7 @@ const App: React.FC = () => {
               <Route path="/healthy-lifestyle" element={<HealthyLifestyle />} />
               <Route path="/new-arrivals" element={<NewArrivals />} />
               <Route path="/pouch-bag" element={<PouchBag />} />
+              <Route path="/my-orders" element={<MyOrders />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
