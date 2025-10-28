@@ -15,7 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useWishlist } from '@/contexts/WishlistContext';
 
 // Sample product data - in real app this would come from API
-const productData = {
+const productData: Record<string, any> = {
   '1': {
     id: '1',
     name: 'Designer Silk Saree',
@@ -54,6 +54,167 @@ const productData = {
     stockCount: 15,
     sku: 'DSS001',
     category: 'Sarees'
+  },
+  // Pouch Bag Products
+  '13': {
+    id: '13',
+    name: 'Waterproof Travel Organizer Pouch',
+    price: 35,
+    originalPrice: 45,
+    brand: 'TravelEase',
+    rating: 4.9,
+    reviews: 342,
+    description: 'Premium waterproof travel organizer with multiple compartments. Perfect for keeping your essentials organized during trips. Durable, lightweight, and stylish.',
+    longDescription: 'This versatile travel organizer pouch features waterproof material to protect your belongings from moisture and spills. With multiple zippered compartments and mesh pockets, it keeps everything from toiletries to electronics neatly organized. The durable construction ensures long-lasting use, while the sleek design makes it perfect for both business and leisure travel.',
+    images: [
+      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=800&fit=crop'
+    ],
+    sizes: ['Small', 'Medium', 'Large'],
+    colors: ['Black', 'Navy', 'Gray'],
+    features: [
+      'Waterproof exterior',
+      'Multiple compartments',
+      'Lightweight design',
+      'Durable zippers',
+      'Easy to clean',
+      'Compact and portable'
+    ],
+    specifications: {
+      'Material': 'Waterproof Nylon',
+      'Compartments': '5 Zippered Sections',
+      'Dimensions': '10" x 7" x 3"',
+      'Weight': '180g',
+      'Care': 'Wipe Clean',
+      'Warranty': '1 Year'
+    },
+    inStock: true,
+    stockCount: 28,
+    sku: 'TPB013',
+    category: 'Pouch Bags'
+  },
+  '17': {
+    id: '17',
+    name: 'Professional Makeup Organizer Pouch',
+    price: 42,
+    originalPrice: 55,
+    brand: 'BeautyPro',
+    rating: 4.8,
+    reviews: 456,
+    description: 'Elegant makeup organizer pouch with compartments for brushes, palettes, and cosmetics. Features premium materials and stylish design.',
+    longDescription: 'Designed for makeup enthusiasts and professionals, this organizer pouch features dedicated sections for brushes, palettes, lipsticks, and more. The luxurious interior lining protects your cosmetics, while the sturdy construction keeps everything secure. Perfect for travel or daily use at your vanity.',
+    images: [
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1563278047-4996d0ffa18a?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&h=800&fit=crop'
+    ],
+    sizes: ['Medium', 'Large'],
+    colors: ['Pink', 'Rose Gold', 'Silver'],
+    features: [
+      'Premium velvet interior',
+      'Brush holder compartment',
+      'Mirror included',
+      'Secure zipper closure',
+      'Dust resistant',
+      'Elegant design'
+    ],
+    specifications: {
+      'Material': 'Vegan Leather & Velvet',
+      'Interior': 'Soft Velvet Lining',
+      'Dimensions': '9" x 6" x 4"',
+      'Weight': '220g',
+      'Mirror': 'Built-in',
+      'Care': 'Spot Clean'
+    },
+    inStock: true,
+    stockCount: 34,
+    sku: 'MPB017',
+    category: 'Pouch Bags'
+  },
+  '21': {
+    id: '21',
+    name: 'Genuine Leather Zip Pouch',
+    price: 78,
+    originalPrice: 95,
+    brand: 'LeatherCraft',
+    rating: 4.9,
+    reviews: 523,
+    description: 'Handcrafted genuine leather pouch with premium finish. Features brass zipper and soft interior lining. Perfect for valuables and everyday essentials.',
+    longDescription: 'This exquisite leather pouch is handcrafted from genuine full-grain leather that develops a beautiful patina over time. The brass zipper ensures smooth operation, while the soft suede interior protects your belongings. Each piece is unique, showcasing the natural characteristics of premium leather. Ideal for storing jewelry, tech accessories, or daily essentials.',
+    images: [
+      'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1564422167509-4f9d69f7f3b8?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=800&fit=crop'
+    ],
+    sizes: ['Small', 'Medium'],
+    colors: ['Cognac', 'Black', 'Burgundy'],
+    features: [
+      'Genuine full-grain leather',
+      'Brass YKK zipper',
+      'Suede interior lining',
+      'Handcrafted quality',
+      'Develops natural patina',
+      'Durable construction'
+    ],
+    specifications: {
+      'Material': 'Full-Grain Leather',
+      'Hardware': 'Brass Zipper',
+      'Interior': 'Soft Suede',
+      'Dimensions': '8" x 5" x 1"',
+      'Weight': '150g',
+      'Care': 'Leather Conditioner'
+    },
+    inStock: true,
+    stockCount: 19,
+    sku: 'LPB021',
+    category: 'Pouch Bags'
+  },
+  '27': {
+    id: '27',
+    name: 'Bohemian Mandala Print Pouch',
+    price: 42,
+    originalPrice: 55,
+    brand: 'BohoStyle',
+    rating: 4.9,
+    reviews: 498,
+    description: 'Vibrant bohemian-style pouch with intricate mandala print. Made from durable canvas with colorful patterns. Perfect for carrying essentials with style.',
+    longDescription: 'Express your unique style with this stunning bohemian mandala print pouch. Featuring vibrant colors and intricate patterns inspired by traditional mandala art, this pouch is both functional and fashionable. The durable canvas construction ensures long-lasting use, while the spacious interior accommodates all your daily essentials. Perfect for festivals, travel, or everyday use.',
+    images: [
+      'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1585916420730-d7f95e942d46?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1564422167509-4f9d69f7f3b8?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&h=800&fit=crop'
+    ],
+    sizes: ['Small', 'Medium'],
+    colors: ['Boho Red', 'Boho Purple', 'Boho Turquoise'],
+    features: [
+      'Intricate mandala design',
+      'Durable canvas material',
+      'Vibrant fade-resistant colors',
+      'Spacious interior',
+      'Zipper closure',
+      'Eco-friendly materials'
+    ],
+    specifications: {
+      'Material': 'Premium Canvas',
+      'Print': 'Digital Mandala Pattern',
+      'Dimensions': '9" x 6" x 2"',
+      'Weight': '140g',
+      'Care': 'Hand Wash',
+      'Origin': 'Fair Trade'
+    },
+    inStock: true,
+    stockCount: 42,
+    sku: 'PPB027',
+    category: 'Pouch Bags'
   }
 };
 
