@@ -9,7 +9,6 @@ import TrendingNowSection from '@/components/TrendingNowSection';
 import TopSellingProducts from '@/components/TopSellingProducts';
 import PromotionalBanners from '@/components/PromotionalBanners';
 import ShopTheLookSection from '@/components/ShopTheLookSection';
-import LifestyleBanner from '@/components/LifestyleBanner';
 import CustomerReviews from '@/components/CustomerReviews';
 import Footer from '@/components/Footer';
 
@@ -26,7 +25,6 @@ const Index = () => {
         <TopSellingProducts />
         <PromotionalBanners />
         <ShopTheLookSection />
-        <LifestyleBanner />
         <CustomerReviews />
       </div>
       <Footer />
