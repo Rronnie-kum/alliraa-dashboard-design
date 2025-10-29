@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
-import { Filter, Grid, List, Star, Heart, ShoppingCart } from 'lucide-react';
+import { Filter, Grid, List, Star, Heart, ShoppingCart, Shirt, Sparkles, Crown, Palette, Scissors, Flower2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Kurti = () => {
@@ -98,12 +98,48 @@ const Kurti = () => {
   ];
 
   const categories = [
-    { id: 'all', name: 'All Kurtis', count: '500+', color: 'bg-gradient-to-br from-purple-500 to-pink-500' },
-    { id: 'cotton', name: 'Cotton Kurtis', count: '120+', color: 'bg-gradient-to-br from-blue-500 to-cyan-500' },
-    { id: 'silk', name: 'Silk Kurtis', count: '85+', color: 'bg-gradient-to-br from-yellow-500 to-orange-500' },
-    { id: 'embroidered', name: 'Embroidered', count: '95+', color: 'bg-gradient-to-br from-green-500 to-teal-500' },
-    { id: 'printed', name: 'Printed', count: '150+', color: 'bg-gradient-to-br from-red-500 to-pink-500' },
-    { id: 'designer', name: 'Designer', count: '60+', color: 'bg-gradient-to-br from-indigo-500 to-purple-500' }
+    { 
+      id: 'all', 
+      name: 'All Kurtis', 
+      count: '500+', 
+      icon: ShoppingCart,
+      gradient: 'from-purple-500 to-pink-500'
+    },
+    { 
+      id: 'cotton', 
+      name: 'Cotton Kurtis', 
+      count: '120+', 
+      icon: Shirt,
+      gradient: 'from-blue-500 to-cyan-500'
+    },
+    { 
+      id: 'silk', 
+      name: 'Silk Kurtis', 
+      count: '85+', 
+      icon: Sparkles,
+      gradient: 'from-yellow-500 to-orange-500'
+    },
+    { 
+      id: 'embroidered', 
+      name: 'Embroidered', 
+      count: '95+', 
+      icon: Scissors,
+      gradient: 'from-green-500 to-teal-500'
+    },
+    { 
+      id: 'printed', 
+      name: 'Printed', 
+      count: '150+', 
+      icon: Palette,
+      gradient: 'from-red-500 to-pink-500'
+    },
+    { 
+      id: 'designer', 
+      name: 'Designer', 
+      count: '60+', 
+      icon: Crown,
+      gradient: 'from-indigo-500 to-purple-500'
+    }
   ];
 
   // Filter and sort products
@@ -205,7 +241,7 @@ const Kurti = () => {
       </section>
 
       {/* Enhanced Categories Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -215,26 +251,48 @@ const Kurti = () => {
               Find your perfect style from our diverse collection
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className={`group relative overflow-hidden rounded-2xl p-8 text-white cursor-pointer transform hover:scale-105 transition-all duration-300 ${category.color} ${selectedCategory === category.id ? 'ring-4 ring-white shadow-2xl' : ''}`}
-                onClick={() => setSelectedCategory(category.id)}
-              >
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-2">{category.name}</h3>
-                  <p className="text-white/90 mb-4">{category.count} items</p>
-                  <div className="inline-flex items-center text-sm font-medium">
-                    {selectedCategory === category.id ? 'Selected' : 'Explore Collection'}
-                    <svg className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((category) => {
+              const Icon = category.icon;
+              const isActive = selectedCategory === category.id;
+              const categoryProducts = kurtiProducts.filter(p => 
+                category.id === 'all' ? true : p.category === category.id
+              );
+              
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-gradient-to-br ' + category.gradient + ' text-white shadow-2xl scale-105' 
+                      : 'bg-white hover:shadow-xl hover:scale-105'
+                  }`}
+                >
+                  <div className="relative z-10 flex flex-col items-center text-center space-y-4">
+                    <div className={`p-4 rounded-full transition-colors ${
+                      isActive 
+                        ? 'bg-white/20 backdrop-blur-sm' 
+                        : 'bg-gray-50 group-hover:bg-gray-100'
+                    }`}>
+                      <Icon className={`h-8 w-8 ${isActive ? 'text-white' : 'text-gray-900'}`} />
+                    </div>
+                    <div>
+                      <h3 className={`font-bold text-lg mb-1 ${isActive ? 'text-white' : 'text-gray-900'}`}>
+                        {category.name}
+                      </h3>
+                      <p className={`text-sm ${isActive ? 'text-white/90' : 'text-gray-600'}`}>
+                        {category.count} items
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                  {!isActive && (
+                    <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity`}></div>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
