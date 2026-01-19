@@ -120,19 +120,8 @@ const Cart = () => {
     }
   };
 
-  const handleCheckout = async () => {
-    setIsCheckingOut(true);
-    
-    // Simulate checkout process
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    toast({
-      title: "Order Placed Successfully!",
-      description: "Thank you for your purchase. You will receive a confirmation email shortly."
-    });
-    
-    setIsCheckingOut(false);
-    navigate('/');
+  const handleCheckout = () => {
+    navigate('/checkout');
   };
 
   const clearCart = () => {
